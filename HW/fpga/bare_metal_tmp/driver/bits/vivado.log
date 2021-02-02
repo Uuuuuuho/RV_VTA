@@ -1,0 +1,22 @@
+#-----------------------------------------------------------
+# Vivado v2018.1 (64-bit)
+# SW Build 2188600 on Wed Apr  4 18:39:19 MDT 2018
+# IP Build 2185939 on Wed Apr  4 20:55:05 MDT 2018
+# Start of session at: Tue Mar 17 14:45:22 2020
+# Process ID: 22545
+# Current directory: /home/uho/workspace/archived_kc705_mii_mod/lowrisc-chip/fpga/bare_metal/driver/bits
+# Command line: vivado sdk
+# Log file: /home/uho/workspace/archived_kc705_mii_mod/lowrisc-chip/fpga/bare_metal/driver/bits/vivado.log
+# Journal file: /home/uho/workspace/archived_kc705_mii_mod/lowrisc-chip/fpga/bare_metal/driver/bits/vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project /home/uho/workspace/archived_kc705_mii_mod/lowrisc-chip/fpga/board/kc705/lowrisc-chip-imp/lowrisc-chip-imp.xpr
+Scanning sources...
+Finished scanning sources
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/opt/Xilinx/Vivado/2018.1/data/ip'.
+open_project: Time (s): cpu = 00:00:14 ; elapsed = 00:00:07 . Memory (MB): peak = 6273.723 ; gain = 200.645 ; free physical = 1403 ; free virtual = 68828
+update_compile_order -fileset sources_1
+exit
+INFO: [Common 17-206] Exiting Vivado at Tue Mar 17 14:46:30 2020...

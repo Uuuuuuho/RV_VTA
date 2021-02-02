@@ -1,0 +1,45 @@
+create_bd_design "design_1"
+
+
+
+
+
+
+               [file normalize $base_dir/chip_top_wrapper.v] \
+               [file normalize $base_dir/src/main/verilog/chip_top.sv] \
+               [file normalize $base_dir/../rocket-chip/vsim/generated-src/freechips.rocketchip.system.DefaultConfig.v] \
+
+               [file normalize $base_dir/src/main/verilog/ps2_translation_table.v] \
+               [file normalize $base_dir/src/main/verilog/nasti_channel.sv] \
+               [file normalize $base_dir/vsrc/AsyncResetReg.v ] \
+               [file normalize $base_dir/vsrc/plusarg_reader.v ] \
+               [file normalize $base_dir/src/main/verilog/fpga_srams_generate.sv]
+
+
+add_files -norecurse -scan_for_includes /home/uho/workspace/lowriscv_chip/HW/porting_src/../rocket-chip/vsim/generated-src/freechips.rocketchip.system.DefaultConfig.v
+import_files -norecurse /home/uho/workspace/lowriscv_chip/HW/porting_src/../rocket-chip/vsim/generated-src/freechips.rocketchip.system.DefaultConfig.v
+
+add_files -norecurse -scan_for_includes /home/uho/workspace/lowriscv_chip/HW/porting_src/src/main/verilog/chip_top.sv
+import_files -norecurse /home/uho/workspace/lowriscv_chip/HW/porting_src/src/main/verilog/chip_top.sv
+
+add_files -norecurse -scan_for_includes /home/uho/workspace/lowriscv_chip/HW/porting_src/chip_top_wrapper.v
+import_files -norecurse /home/uho/workspace/lowriscv_chip/HW/porting_src/chip_top_wrapper.v
+
+add_files -norecurse -scan_for_includes /home/uho/workspace/lowriscv_chip/HW/porting_src/src/main/verilog/ps2_translation_table.v
+import_files -norecurse /home/uho/workspace/lowriscv_chip/HW/porting_src/src/main/verilog/ps2_translation_table.v
+
+add_files -norecurse -scan_for_includes /home/uho/workspace/lowriscv_chip/HW/porting_src/src/main/verilog/ps2_translation_table.v
+import_files -norecurse /home/uho/workspace/lowriscv_chip/HW/porting_src/src/main/verilog/ps2_translation_table.v
+
+
+add_files -norecurse -scan_for_includes /home/uho/workspace/lowriscv_chip/HW/porting_src/src/main/verilog/nasti_channel.sv
+import_files -norecurse /home/uho/workspace/lowriscv_chip/HW/porting_src/src/main/verilog/nasti_channel.sv
+
+add_files -norecurse -scan_for_includes /home/uho/workspace/lowriscv_chip/HW/porting_src/vsrc/AsyncResetReg.v
+import_files -norecurse /home/uho/workspace/lowriscv_chip/HW/porting_src/vsrc/AsyncResetReg.v
+
+add_files -norecurse -scan_for_includes /home/uho/workspace/lowriscv_chip/HW/porting_src/vsrc/plusarg_reader.v
+import_files -norecurse /home/uho/workspace/lowriscv_chip/HW/porting_src/vsrc/plusarg_reader.v
+
+add_files -norecurse -scan_for_includes /home/uho/workspace/lowriscv_chip/HW/porting_src/src/main/verilog/fpga_srams_generate.sv
+import_files -norecurse /home/uho/workspace/lowriscv_chip/HW/porting_src/src/main/verilog/fpga_srams_generate.sv

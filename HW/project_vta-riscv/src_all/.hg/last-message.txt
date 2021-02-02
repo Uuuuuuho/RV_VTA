@@ -1,0 +1,4 @@
+add module
+        available : Rocket chip
+        unavailable : psoc
+        should remove ram_behav

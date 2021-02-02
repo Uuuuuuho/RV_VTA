@@ -1,0 +1,1 @@
+/home/uho/workspace/lowriscv_chip/qemu/tests/acpi-test-data/rebuild-expected-aml.sh

@@ -1,0 +1,10 @@
+cd examples/
+make clean
+cd ../
+make tests
+make bit-update
+cd ~/workspace/lowriscv_chip/HW/fpga/board/kc705/lowrisc-chip-imp/lowrisc-chip-imp.runs/impl_1
+mv chip_top.new.bit chip_top.bit 
+cd /home/uho/workspace/lowriscv_chip/HW/fpga/board/kc705
+make program
+

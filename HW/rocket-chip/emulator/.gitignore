@@ -1,0 +1,14 @@
+*~
+*.o
+*.a
+*.log
+output/
+emulator-*
+generated-src
+generated-src-debug
+kernel
+kernel.hex
+verilator/
+logfile
+test.vcd
+ver.sh

@@ -1,0 +1,15 @@
+#-----------------------------------------------------------
+# Vivado v2018.1 (64-bit)
+# SW Build 2188600 on Wed Apr  4 18:39:19 MDT 2018
+# IP Build 2185939 on Wed Apr  4 20:55:05 MDT 2018
+# Start of session at: Fri Oct 30 09:52:40 2020
+# Process ID: 27836
+# Current directory: /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/KC705_vta_riscV
+# Command line: vivado KC705_vta_riscV.xpr
+# Log file: /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/KC705_vta_riscV/vivado.log
+# Journal file: /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/KC705_vta_riscV/vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project KC705_vta_riscV.xpr
+update_compile_order -fileset sources_1
+open_bd_design {/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/KC705_vta_riscV/KC705_vta_riscV.srcs/sources_1/bd/chip_top/chip_top.bd}

@@ -1,0 +1,7 @@
+driver_subproject_deps = \
+
+driver_hdrs = \
+  hid.h \
+
+driver_c_srcs = \
+  hid.c \

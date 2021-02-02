@@ -1,0 +1,751 @@
+// See LICENSE for license details.
+
+`include "consts.vh"
+`include "config.vh"
+
+// Allow ISA regression test to use proper FPGA configuration
+
+module chip_top_without_mig_clkwiz
+  (
+   //clock related
+
+   input wire         rstn,           //from mig
+   input wire         clk,            //from wiz_0  
+   input wire         clk_locked_wiz, //from wiz_0
+   input wire         rst_top,        //from external
+   input wire         mig_sys_clk,    //from wiz_0
+   input wire         clk_pixel,      //from wiz_0
+   input wire         clk_mii,        //from wiz_0
+   input wire         mig_ui_clk,     //from mig
+   input wire         mig_ui_rst,     //from mig
+
+   ///////////////////////////////////////////
+
+   //ADD_HID
+	// Simple UART interface
+	input wire         rxd,
+	output wire        txd,
+	output wire        rts,
+	input wire         cts,
+
+	// 4-bit full SD interface
+	inout wire         sd_sclk,
+	input wire         sd_detect,
+	inout wire [3:0]   sd_dat,
+	inout wire         sd_cmd,
+	output wire        sd_reset,
+
+	// LED and DIP switch
+	output wire [7:0]  o_led,
+	input wire  [3:0]  i_dip,
+	// push button array
+	input wire         GPIO_SW_C,
+	input wire         GPIO_SW_W,
+	input wire         GPIO_SW_E,
+	input wire         GPIO_SW_N,
+	input wire         GPIO_SW_S,
+	//keyboard
+	inout wire         PS2_CLK,
+	inout wire         PS2_DATA,
+
+	//! Ethernet MAC PHY interface signals
+	input wire         i_erx_dv, 		// PHY data valid
+	input wire         i_erx_er, 		// PHY coding error
+	input wire         i_emdint, 		// PHY interrupt in active low
+	output reg         o_erefclk, 		// RMII clock out
+	output reg         o_etx_en, 		// RMII transmit enable
+	//KC705   
+	input wire [3:0]   i_erxd, 			// RMII receive data
+	output reg [7:0]   o_etxd, 			// RMII transmit data
+	output reg         o_etx_er, 		// RMII transmit enable
+	input wire         i_gmiiclk_p,
+	input wire         i_gmiiclk_n,
+	input wire         i_erx_clk,
+	input wire         i_etx_clk,
+	output wire        o_emdc, 			// MDIO clock
+	inout wire         io_emdio, 		// MDIO inout
+	output wire        o_erstn, 		// PHY reset active low
+
+   //above port --> Existing external interface
+
+   //below port --> Fixed interface
+
+   // output wire [29:0] mig_s_axi_awaddr,
+   // output wire [29:0] mig_s_axi_araddr,
+
+   
+   output wire [3:0]  mig_s_axi_awid,
+   output wire [31:0] mig_s_axi_awaddr,
+   output wire [7:0]  mig_s_axi_awlen,
+   output wire [2:0]  mig_s_axi_awsize,
+   output wire [1:0]  mig_s_axi_awburst,
+   output wire [0:0]  mig_s_axi_awlock,
+   output wire [3:0]  mig_s_axi_awcache,
+   output wire [2:0]  mig_s_axi_awprot,
+   output wire [3:0]  mig_s_axi_awqos,
+   output wire        mig_s_axi_awvalid,
+   input  wire        mig_s_axi_awready,
+   output wire [63:0] mig_s_axi_wdata,
+   output wire [7:0]  mig_s_axi_wstrb,
+   output wire        mig_s_axi_wlast,
+   output wire        mig_s_axi_wvalid,
+   input  wire        mig_s_axi_wready,
+   input  wire [3:0]  mig_s_axi_bid,
+   input  wire [1:0]  mig_s_axi_bresp,
+   input  wire        mig_s_axi_bvalid,
+   output wire        mig_s_axi_bready,
+   output wire [3:0]  mig_s_axi_arid,
+   output wire [31:0] mig_s_axi_araddr,
+   output wire [7:0]  mig_s_axi_arlen,
+   output wire [2:0]  mig_s_axi_arsize,
+   output wire [1:0]  mig_s_axi_arburst,
+   output wire [0:0]  mig_s_axi_arlock,
+   output wire [3:0]  mig_s_axi_arcache,
+   output wire [2:0]  mig_s_axi_arprot,
+   output wire [3:0]  mig_s_axi_arqos,
+   output wire        mig_s_axi_arvalid,
+   input  wire        mig_s_axi_arready,
+   input  wire [3:0]  mig_s_axi_rid,
+   input  wire [63:0] mig_s_axi_rdata,
+   input  wire [1:0]  mig_s_axi_rresp,
+   input  wire        mig_s_axi_rlast,
+   input  wire        mig_s_axi_rvalid,
+   output wire        mig_s_axi_rready,
+
+//external interface
+
+   input  wire         sd_clk_o,
+   output wire [6:0]   sd_clk_daddr,
+   output wire         sd_clk_den,
+   output wire [15:0]  sd_clk_din,
+   input  wire [15:0]  sd_clk_dout,
+   input  wire         sd_clk_drdy,
+   output wire         sd_clk_dwe,
+   output wire         clk_wiz1_rst,
+   input  wire         sd_clk_locked
+
+);
+// logic clk_wiz1_rstn;
+// assign clk_wiz1_rstn = !clk_wiz1_rst;
+
+
+
+// wire clk_wiz1_rstn;
+// logic clk_wiz1_rstn;
+// assign clk_wiz1_rstn = clk_wiz1_rstn;
+// assign clk_wiz1_rstn = ~clk_wiz1_rst;
+	
+logic  sys_rst;
+assign sys_rst = ~rstn;
+
+logic mig_ui_rstn;
+assign mig_ui_rstn = !mig_ui_rst;
+
+// NASTI/Lite on-chip interconnects
+
+`define MEM_NASTI mem_nasti
+// Rocket memory nasti bus
+nasti_channel
+   #(
+   .ID_WIDTH    ( `MEM_ID_WIDTH   ),
+   .ADDR_WIDTH  ( `MEM_ADDR_WIDTH ),
+   .DATA_WIDTH  ( `MEM_DATA_WIDTH ))
+mem_nasti();
+
+/////////////////////////////////////////////////////////////
+// IO space buses
+nasti_channel
+   #(
+   .ID_WIDTH    ( `MMIO_MASTER_ID_WIDTH   ),
+   .ADDR_WIDTH  ( `MMIO_MASTER_ADDR_WIDTH ),
+   .DATA_WIDTH  ( `MMIO_MASTER_DATA_WIDTH ))
+mmio_master_nasti();
+
+nasti_channel
+   #(
+   .ID_WIDTH    ( `MMIO_SLAVE_ID_WIDTH   ),
+   .ADDR_WIDTH  ( `MMIO_SLAVE_ADDR_WIDTH ),
+   .DATA_WIDTH  ( `MMIO_SLAVE_DATA_WIDTH ))
+io_slave_nasti();      // IO nasti interface to Rocket
+
+// currently the slave port is not used
+assign io_slave_nasti.aw_valid = 'b0;
+assign io_slave_nasti.w_valid  = 'b0;
+assign io_slave_nasti.b_ready  = 'b0;
+assign io_slave_nasti.ar_valid = 'b0;
+assign io_slave_nasti.r_ready  = 'b0;
+
+/////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////
+// clock converter
+
+   axi_clock_converter_0 clk_conv
+     (
+      .s_axi_aclk           ( clk                      ),
+      .s_axi_aresetn        ( rstn                     ),
+      .s_axi_awid           ( mem_nasti.aw_id          ),
+      .s_axi_awaddr         ( mem_nasti.aw_addr        ),
+      .s_axi_awlen          ( mem_nasti.aw_len         ),
+      .s_axi_awsize         ( mem_nasti.aw_size        ),
+      .s_axi_awburst        ( mem_nasti.aw_burst       ),
+      .s_axi_awlock         ( 1'b0                     ), // not supported in AXI4
+      .s_axi_awcache        ( mem_nasti.aw_cache       ),
+      .s_axi_awprot         ( mem_nasti.aw_prot        ),
+      .s_axi_awqos          ( mem_nasti.aw_qos         ),
+      .s_axi_awregion       ( 4'b0                     ), // not supported in AXI4
+      .s_axi_awvalid        ( mem_nasti.aw_valid       ),
+      .s_axi_awready        ( mem_nasti.aw_ready       ),
+      .s_axi_wdata          ( mem_nasti.w_data         ),
+      .s_axi_wstrb          ( mem_nasti.w_strb         ),
+      .s_axi_wlast          ( mem_nasti.w_last         ),
+      .s_axi_wvalid         ( mem_nasti.w_valid        ),
+      .s_axi_wready         ( mem_nasti.w_ready        ),
+      .s_axi_bid            ( mem_nasti.b_id           ),
+      .s_axi_bresp          ( mem_nasti.b_resp         ),
+      .s_axi_bvalid         ( mem_nasti.b_valid        ),
+      .s_axi_bready         ( mem_nasti.b_ready        ),
+      .s_axi_arid           ( mem_nasti.ar_id          ),
+      .s_axi_araddr         ( mem_nasti.ar_addr        ),
+      .s_axi_arlen          ( mem_nasti.ar_len         ),
+      .s_axi_arsize         ( mem_nasti.ar_size        ),
+      .s_axi_arburst        ( mem_nasti.ar_burst       ),
+      .s_axi_arlock         ( 1'b0                     ), // not supported in AXI4
+      .s_axi_arcache        ( mem_nasti.ar_cache       ),
+      .s_axi_arprot         ( mem_nasti.ar_prot        ),
+      .s_axi_arqos          ( mem_nasti.ar_qos         ),
+      .s_axi_arregion       ( 4'b0                     ), // not supported in AXI4
+      .s_axi_arvalid        ( mem_nasti.ar_valid       ),
+      .s_axi_arready        ( mem_nasti.ar_ready       ),
+      .s_axi_rid            ( mem_nasti.r_id           ),
+      .s_axi_rdata          ( mem_nasti.r_data         ),
+      .s_axi_rresp          ( mem_nasti.r_resp         ),
+      .s_axi_rlast          ( mem_nasti.r_last         ),
+      .s_axi_rvalid         ( mem_nasti.r_valid        ),
+      .s_axi_rready         ( mem_nasti.r_ready        ),
+      .m_axi_aclk           ( mig_ui_clk               ), //from mig
+      .m_axi_aresetn        ( mig_ui_rstn              ), //internal gen
+
+      .m_axi_awid           ( mig_s_axi_awid           ),
+      .m_axi_awaddr         ( mig_s_axi_awaddr         ),
+      .m_axi_awlen          ( mig_s_axi_awlen          ),
+      .m_axi_awsize         ( mig_s_axi_awsize         ),
+      .m_axi_awburst        ( mig_s_axi_awburst        ),
+      .m_axi_awcache        ( mig_s_axi_awlock         ),
+      .m_axi_awprot         ( mig_s_axi_awcache        ),
+      .m_axi_awqos          ( mig_s_axi_awprot         ),
+      .m_axi_awregion       ( mig_s_axi_awqos          ),
+      .m_axi_awvalid        ( mig_s_axi_awvalid        ),
+      .m_axi_awready        ( mig_s_axi_awready        ),
+      .m_axi_wdata          ( mig_s_axi_wdata          ),
+      .m_axi_wstrb          ( mig_s_axi_wstrb          ),
+      .m_axi_wlast          ( mig_s_axi_wlast          ),
+      .m_axi_wvalid         ( mig_s_axi_wvalid         ),
+      .m_axi_wready         ( mig_s_axi_wready         ),
+      .m_axi_bid            ( mig_s_axi_bid            ),
+      .m_axi_bresp          ( mig_s_axi_bresp          ),
+      .m_axi_bvalid         ( mig_s_axi_bvalid         ),
+      .m_axi_bready         ( mig_s_axi_bready         ),
+      .m_axi_arid           ( mig_s_axi_arid           ),
+      .m_axi_araddr         ( mig_s_axi_araddr         ),
+      .m_axi_arlen          ( mig_s_axi_arlen          ),
+      .m_axi_arsize         ( mig_s_axi_arsize         ),
+      .m_axi_arburst        ( mig_s_axi_arburst        ),
+      .m_axi_arcache        ( mig_s_axi_arlock         ),
+      .m_axi_arprot         ( mig_s_axi_arcache        ),
+      .m_axi_arqos          ( mig_s_axi_arprot         ),
+      .m_axi_arregion       ( mig_s_axi_arqos          ),
+      .m_axi_arvalid        ( mig_s_axi_arvalid        ),
+      .m_axi_arready        ( mig_s_axi_arready        ),
+      .m_axi_rid            ( mig_s_axi_rid            ),
+      .m_axi_rdata          ( mig_s_axi_rdata          ),
+      .m_axi_rresp          ( mig_s_axi_rresp          ),
+      .m_axi_rlast          ( mig_s_axi_rlast          ),
+      .m_axi_rvalid         ( mig_s_axi_rvalid         ),
+      .m_axi_rready         ( mig_s_axi_rready         )
+);
+
+/////////////////////////////////////////////////////////////
+// On-chip Block RAM
+
+//ADD_BRAM
+
+localparam BRAM_SIZE          = 16;        // 2^16 -> 64 KB
+localparam BRAM_WIDTH         = 128;       // always 128-bit wide
+localparam BRAM_LINE          = 2 ** BRAM_SIZE / (BRAM_WIDTH/8);
+localparam BRAM_OFFSET_BITS   = $clog2(`LOWRISC_IO_DAT_WIDTH/8);
+localparam BRAM_ADDR_LSB_BITS = $clog2(BRAM_WIDTH / `LOWRISC_IO_DAT_WIDTH);
+localparam BRAM_ADDR_BLK_BITS = BRAM_SIZE - BRAM_ADDR_LSB_BITS - BRAM_OFFSET_BITS;
+
+initial assert (BRAM_OFFSET_BITS < 7) else $fatal(1, "Do not support BRAM AXI width > 64-bit!");
+
+logic          ram_clk, ram_rst, ram_en;
+logic [7:0]    ram_we;
+logic [15:0]   ram_addr;
+logic [63:0]   ram_wrdata, ram_rddata;
+
+logic [30:0] bram_ar_addr, bram_aw_addr;
+
+assign bram_ar_addr = mmio_master_nasti.ar_addr ;
+assign bram_aw_addr = mmio_master_nasti.aw_addr ;
+   
+reg   [BRAM_WIDTH-1:0]         ram [0 : BRAM_LINE-1];
+logic [BRAM_ADDR_BLK_BITS-1:0] ram_block_addr, ram_block_addr_delay;
+logic [BRAM_ADDR_LSB_BITS-1:0] ram_lsb_addr, ram_lsb_addr_delay;
+logic [BRAM_WIDTH/8-1:0]       ram_we_full;
+logic [BRAM_WIDTH-1:0]         ram_wrdata_full, ram_rddata_full;
+int                            ram_rddata_shift, ram_we_shift;
+
+assign ram_block_addr = ram_addr >> BRAM_ADDR_LSB_BITS + BRAM_OFFSET_BITS;
+assign ram_lsb_addr = ram_addr >> BRAM_OFFSET_BITS;
+assign ram_we_shift = ram_lsb_addr << BRAM_OFFSET_BITS; // avoid ISim error
+assign ram_we_full = ram_we << ram_we_shift;
+assign ram_wrdata_full = {(BRAM_WIDTH / `LOWRISC_IO_DAT_WIDTH){ram_wrdata}};
+
+always @(posedge ram_clk)begin
+  if(ram_en) begin
+     ram_block_addr_delay <= ram_block_addr;
+     ram_lsb_addr_delay <= ram_lsb_addr;
+     foreach (ram_we_full[i])
+       if(ram_we_full[i]) ram[ram_block_addr][i*8 +:8] <= ram_wrdata_full[i*8 +: 8];
+  end
+end
+
+assign ram_rddata_full = ram[ram_block_addr_delay];
+assign ram_rddata_shift = ram_lsb_addr_delay << (BRAM_OFFSET_BITS + 3); // avoid ISim error
+assign ram_rddata = ram_rddata_full >> ram_rddata_shift;
+
+initial $readmemh("boot.mem", ram);
+
+
+//useless port
+wire                        hid_rst, hid_clk, hid_en;
+wire [7:0]                  hid_we;
+wire [17:0]                 hid_addr;
+wire [63:0]                 hid_wrdata,  hid_rddata;
+logic [30:0]                hid_ar_addr, hid_aw_addr;
+
+
+/////////////////////////////////////////////////////////////
+///// BRAM ctrl
+/////////////////////////////////////////////////////////////
+
+axi_bram_ctrl_dummy BramCtl
+     (
+      .s_axi_aclk      ( clk                        ),
+      .s_axi_aresetn   ( rstn                       ),
+      .s_axi_arid      ( mmio_master_nasti.ar_id    ),
+      .s_axi_araddr    ( bram_ar_addr[17:0]         ),
+      .s_axi_arlen     ( mmio_master_nasti.ar_len   ),
+      .s_axi_arsize    ( mmio_master_nasti.ar_size  ),
+      .s_axi_arburst   ( mmio_master_nasti.ar_burst ),
+      .s_axi_arlock    ( mmio_master_nasti.ar_lock  ),
+      .s_axi_arcache   ( mmio_master_nasti.ar_cache ),
+      .s_axi_arprot    ( mmio_master_nasti.ar_prot  ),
+      .s_axi_arready   ( mmio_master_nasti.ar_ready ),
+      .s_axi_arvalid   ( mmio_master_nasti.ar_valid ),
+      .s_axi_rid       ( mmio_master_nasti.r_id     ),
+      .s_axi_rdata     ( mmio_master_nasti.r_data   ),
+      .s_axi_rresp     ( mmio_master_nasti.r_resp   ),
+      .s_axi_rlast     ( mmio_master_nasti.r_last   ),
+      .s_axi_rready    ( mmio_master_nasti.r_ready  ),
+      .s_axi_rvalid    ( mmio_master_nasti.r_valid  ),
+      .s_axi_awid      ( mmio_master_nasti.aw_id    ),
+      .s_axi_awaddr    ( bram_aw_addr[17:0]         ),
+      .s_axi_awlen     ( mmio_master_nasti.aw_len   ),
+      .s_axi_awsize    ( mmio_master_nasti.aw_size  ),
+      .s_axi_awburst   ( mmio_master_nasti.aw_burst ),
+      .s_axi_awlock    ( mmio_master_nasti.aw_lock  ),
+      .s_axi_awcache   ( mmio_master_nasti.aw_cache ),
+      .s_axi_awprot    ( mmio_master_nasti.aw_prot  ),
+      .s_axi_awready   ( mmio_master_nasti.aw_ready ),
+      .s_axi_awvalid   ( mmio_master_nasti.aw_valid ),
+      .s_axi_wdata     ( mmio_master_nasti.w_data   ),
+      .s_axi_wstrb     ( mmio_master_nasti.w_strb   ),
+      .s_axi_wlast     ( mmio_master_nasti.w_last   ),
+      .s_axi_wready    ( mmio_master_nasti.w_ready  ),
+      .s_axi_wvalid    ( mmio_master_nasti.w_valid  ),
+      .s_axi_bid       ( mmio_master_nasti.b_id     ),
+      .s_axi_bresp     ( mmio_master_nasti.b_resp   ),
+      .s_axi_bready    ( mmio_master_nasti.b_ready  ),
+      .s_axi_bvalid    ( mmio_master_nasti.b_valid  ),
+      .bram_rst_a      ( hid_rst                    ), 
+      .bram_clk_a      ( hid_clk                    ), 
+      .bram_en_a       ( hid_en                     ), 
+      .bram_we_a       ( hid_we                     ), 
+      .bram_addr_a     ( hid_addr                   ), 
+      .bram_wrdata_a   ( hid_wrdata                 ), 
+      .bram_rddata_a   ( hid_rddata                 )  
+      );
+
+
+/////////////////////////////////////////////////////////////
+///// psoc 
+/////////////////////////////////////////////////////////////
+
+
+logic spi_irq, sd_irq, eth_irq, uart_irq;
+
+assign spi_irq = 1'b0;
+
+logic [7:0] unused_led;
+
+wire clk_locked;
+assign clk_locked = clk_locked_wiz & !rst_top; //external
+
+logic eth_rstn, eth_refclk, eth_txen, eth_txer, eth_rxerr;
+logic [3:0]  eth_rxd;
+assign o_erstn = eth_rstn & clk_locked_wiz;
+
+wire io_emdio_i, phy_emdio_o, phy_emdio_t;
+reg phy_emdio_i, io_emdio_o, io_emdio_t;
+
+//KC705    
+always @(posedge i_etx_clk) begin
+     phy_emdio_i <= io_emdio_i;
+     io_emdio_o <= phy_emdio_o;
+     io_emdio_t <= phy_emdio_t;
+end
+
+   IOBUF #(
+      .DRIVE(12), // Specify the output drive strength
+      .IBUF_LOW_PWR("TRUE"),  // Low Power - "TRUE", High Performance = "FALSE" 
+      .IOSTANDARD("DEFAULT"), // Specify the I/O standard
+      .SLEW("SLOW") // Specify the output slew rate
+   ) IOBUF_inst (
+      .O(io_emdio_i),     // Buffer output
+      .IO(io_emdio),   // Buffer inout port (connect directly to top-level port)
+      .I(io_emdio_o),     // Buffer input
+      .T(io_emdio_t)      // 3-state enable input, high=input, low=output
+   );
+
+  ODDR #(
+    .DDR_CLK_EDGE("OPPOSITE_EDGE"),
+    .INIT(1'b0),
+    .IS_C_INVERTED(1'b0),
+    .IS_D1_INVERTED(1'b0),
+    .IS_D2_INVERTED(1'b0),
+    .SRTYPE("SYNC")) 
+    refclk_inst
+       (.C(eth_refclk),
+        .CE(1'b1),
+        .D1(1'b1),
+        .D2(1'b0),
+        .Q(o_erefclk),
+        .R(1'b0),
+        .S( ));
+
+
+always @(posedge i_erx_clk) begin
+   eth_rxd   = i_erxd;
+   eth_rxerr = i_erx_er;         
+end
+   
+logic [3:0] eth_txd;
+
+always @(posedge i_etx_clk) begin
+   o_etxd   <= eth_txd;
+   o_etx_en <= eth_txen;
+   o_etx_er <= eth_txer;
+end
+
+  wire sd_clk_rst;
+
+   periph_soc_mod #(.UBAUD_DEFAULT(108)) psoc
+     (
+      .msoc_clk   ( clk                ), //external
+      .sd_sclk    ( sd_sclk            ), //external
+      .sd_detect  ( sd_detect          ), //external
+      .sd_dat     ( sd_dat             ), //external
+      .sd_cmd     ( sd_cmd             ), //external
+      .sd_irq     ( sd_irq             ), //internal
+      .sd_reset   ( sd_reset           ),
+   //KC705
+      .from_dip   ( {12'b0,i_dip}      ), //external
+      .to_led     ( {unused_led,o_led} ), //external
+      .rstn       ( clk_locked         ), //internal
+      .clk_200MHz ( mig_sys_clk        ), //wiz0
+      .pxl_clk    ( clk_pixel          ), //wiz0
+      .uart_rx    ( rxd                ), //external
+      .uart_tx    ( txd                ), //external
+      .uart_irq   ( uart_irq           ),
+   //KC705   
+      .i_erx_clk  ( i_erx_clk          ), //external
+      .i_etx_clk  ( i_etx_clk          ), //external 
+      .clk_mii    ( clk_mii            ), //wiz0
+      .locked     ( clk_locked         ), //internal
+    // SMSC ethernet PHY connections
+      .eth_rstn   ( eth_rstn           ), 
+      .eth_crsdv  ( i_erx_dv           ), 
+      .eth_refclk ( eth_refclk         ), 
+      .eth_txd    ( eth_txd            ), 
+      .eth_txen   ( eth_txen           ), 
+      .eth_txer   ( eth_txer           ), 
+      .eth_rxd    ( eth_rxd            ),
+      .eth_rxerr  ( eth_rxerr          ),
+      .eth_mdc    ( o_emdc             ), //external
+      .phy_mdio_i ( phy_emdio_i        ),
+      .phy_mdio_o ( phy_emdio_o        ),
+      .phy_mdio_t ( phy_emdio_t        ),
+      .eth_irq    ( eth_irq            ),
+
+      .ram_clk    ( ram_clk            ),
+      .ram_rst    ( ram_rst            ),
+      .ram_en     ( ram_en             ),
+      .ram_we     ( ram_we             ),
+      .ram_addr   ( ram_addr           ),
+      .ram_wrdata ( ram_wrdata         ),
+      .ram_rddata ( ram_rddata         ),
+
+      .hid_en     (hid_en              ),
+      .hid_we     (hid_we              ),
+      .hid_addr   (hid_addr            ),
+      .hid_wrdata (hid_wrdata          ),
+      .hid_rddata (hid_rddata          ),
+
+
+      //keyboard
+      .PS2_CLK     (PS2_CLK            ),
+      .PS2_DATA    (PS2_DATA           ),
+
+      // pusb button array
+      .GPIO_SW_C   (GPIO_SW_C          ),
+      .GPIO_SW_W   (GPIO_SW_W          ),
+      .GPIO_SW_E   (GPIO_SW_E          ),
+      .GPIO_SW_N   (GPIO_SW_N          ),
+      .GPIO_SW_S   (GPIO_SW_S          ),
+
+      .sd_clk_o     (sd_clk_o          ),
+      .sd_clk_daddr (sd_clk_daddr      ),
+      .sd_clk_den   (sd_clk_den        ),
+      .sd_clk_din   (sd_clk_din        ),
+      .sd_clk_dout  (sd_clk_dout       ),
+      .sd_clk_drdy  (sd_clk_drdy       ),
+      .sd_clk_dwe   (sd_clk_dwe        ),
+      .sd_clk_rst   (sd_clk_rst        ),
+      .sd_clk_locked (sd_clk_locked    )
+);
+
+   assign rts = cts;
+   // assign clk_wiz1_rst = (sd_clk_rst&rstn);
+   assign clk_wiz1_rst = ~(sd_clk_rst&rstn);
+   // assign clk_wiz1_rstn = ~(sd_clk_rst&rstn);
+
+
+///psoc end
+/////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////
+///// rocket chip
+/////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////
+// Host for ISA regression
+nasti_channel
+   #(
+   .ADDR_WIDTH  ( `MMIO_MASTER_ADDR_WIDTH   ),
+   .DATA_WIDTH  ( `LOWRISC_IO_DAT_WIDTH     ))
+io_host_lite();
+//would be not used
+/////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////
+// the Rocket chip
+
+//wire CAPTURE, DRCK, RESET, RUNTEST, SEL, SHIFT, TCK, TDI, TMS, UPDATE, TDO, TCK_unbuf;
+
+/* This block is just used to feed the JTAG clock into the parts of Rocket that need it */
+ //BSCANE2 #(
+ //   .JTAG_CHAIN(2)  // Value for USER command.
+ //)
+ //BSCANE2_inst1 (
+ //  .CAPTURE(CAPTURE), // 1-bit output: CAPTURE output from TAP controller.
+ //  .DRCK(DRCK),       // 1-bit output: Gated TCK output. When SEL is asserted, DRCK toggles when CAPTURE or
+ //                     // // SHIFT are asserted.
+ //  .RESET(RESET),     // 1-bit output: Reset output for TAP controller.
+ //  .RUNTEST(RUNTEST), // 1-bit output: Output asserted when TAP controller is in Run Test/Idle state.
+ //  .SEL(SEL),         // 1-bit output: USER instruction active output.
+ //  .SHIFT(SHIFT),     // 1-bit output: SHIFT output from TAP controller.
+ //  .TCK(TCK_unbuf),   // 1-bit output: Test Clock output. Fabric connection to TAP Clock pin.
+ //  .TDI(TDI),         // 1-bit output: Test Data Input (TDI) output from TAP controller.
+ //  .TMS(TMS),         // 1-bit output: Test Mode Select output. Fabric connection to TAP.
+ //  .UPDATE(UPDATE),   // 1-bit output: UPDATE output from TAP controller
+ //  .TDO(TDO)          // 1-bit input: Test Data Output (TDO) input for USER function.
+ //);
+
+// BUFH: HROW Clock Buffer for a Single Clocking Region
+//       Artix-7
+// Xilinx HDL Language Template, version 2016.1
+//   BUFH BUFH_inst (
+//      .O(TCK), // 1-bit output: Clock output
+//      .I(TCK_unbuf)  // 1-bit input: Clock input
+//   );
+
+  /* DMI interface tie-off */
+  wire  ExampleRocketSystem_debug_ndreset;
+  wire  ExampleRocketSystem_debug_dmactive;
+
+
+  reg [31:0] io_reset_vector;
+   always @*
+     begin
+        casez (i_dip[1:0])
+          2'b?0: io_reset_vector = 32'h40000000;
+          2'b01: io_reset_vector = 32'h80000000;
+          2'b11: io_reset_vector = 32'h80200000;
+        endcase // casez ()
+     end
+
+
+      wire TDO_dummy;
+      wire TDO_driven_dummy;
+      wire ExampleRocketSystem_debug_ndreset_dummy;
+      wire ExampleRocketSystem_debug_dmactive_dummy;
+
+   ExampleRocketSystem Rocket
+     (
+
+/*      
+      .debug_systemjtag_jtag_TCK                (TCK),                                // in
+      .debug_systemjtag_jtag_TMS                (TMS),                                // in
+      .debug_systemjtag_jtag_TDI                (TDI),                                // in
+      .debug_systemjtag_jtag_TDO_data           (TDO),                                // out
+      .debug_systemjtag_jtag_TDO_driven         (TDO_driven),                         // out
+      .debug_systemjtag_reset                   (RESET),                              // in
+      .debug_systemjtag_mfr_id                  (11'h5AA),                            // in
+      .debug_ndreset                            (ExampleRocketSystem_debug_ndreset),  // out
+      .debug_dmactive                           (ExampleRocketSystem_debug_dmactive), // out
+*/
+
+      .debug_systemjtag_jtag_TCK                ('b0                               ), // in
+      .debug_systemjtag_jtag_TMS                ('b0                               ), // in
+      .debug_systemjtag_jtag_TDI                ('b0                               ), // in
+      .debug_systemjtag_reset                   ('b0                               ), // in
+      .debug_systemjtag_mfr_id                  ('b0                               ), // in
+      .debug_systemjtag_jtag_TDO_data           (TDO_dummy), // out
+      .debug_systemjtag_jtag_TDO_driven         (TDO_driven_dummy), // out
+      .debug_ndreset                            (ExampleRocketSystem_debug_ndreset_dummy), // out
+      .debug_dmactive                           (ExampleRocketSystem_debug_dmactive_dummy), // out
+
+      .mem_axi4_0_aw_valid                      ( `MEM_NASTI.aw_valid                     ),
+      .mem_axi4_0_aw_ready                      ( `MEM_NASTI.aw_ready                     ),
+      .mem_axi4_0_aw_bits_id                    ( `MEM_NASTI.aw_id                        ),
+      .mem_axi4_0_aw_bits_addr                  ( `MEM_NASTI.aw_addr                      ),
+      .mem_axi4_0_aw_bits_len                   ( `MEM_NASTI.aw_len                       ),
+      .mem_axi4_0_aw_bits_size                  ( `MEM_NASTI.aw_size                      ),
+      .mem_axi4_0_aw_bits_burst                 ( `MEM_NASTI.aw_burst                     ),
+      .mem_axi4_0_aw_bits_lock                  ( `MEM_NASTI.aw_lock                      ),
+      .mem_axi4_0_aw_bits_cache                 ( `MEM_NASTI.aw_cache                     ),
+      .mem_axi4_0_aw_bits_prot                  ( `MEM_NASTI.aw_prot                      ),
+      .mem_axi4_0_aw_bits_qos                   ( `MEM_NASTI.aw_qos                       ),
+      .mem_axi4_0_w_valid                       ( `MEM_NASTI.w_valid                      ),
+      .mem_axi4_0_w_ready                       ( `MEM_NASTI.w_ready                      ),
+      .mem_axi4_0_w_bits_data                   ( `MEM_NASTI.w_data                       ),
+      .mem_axi4_0_w_bits_strb                   ( `MEM_NASTI.w_strb                       ),
+      .mem_axi4_0_w_bits_last                   ( `MEM_NASTI.w_last                       ),
+      .mem_axi4_0_b_valid                       ( `MEM_NASTI.b_valid                      ),
+      .mem_axi4_0_b_ready                       ( `MEM_NASTI.b_ready                      ),
+      .mem_axi4_0_b_bits_id                     ( `MEM_NASTI.b_id                         ),
+      .mem_axi4_0_b_bits_resp                   ( `MEM_NASTI.b_resp                       ),
+      .mem_axi4_0_ar_valid                      ( `MEM_NASTI.ar_valid                     ),
+      .mem_axi4_0_ar_ready                      ( `MEM_NASTI.ar_ready                     ),
+      .mem_axi4_0_ar_bits_id                    ( `MEM_NASTI.ar_id                        ),
+      .mem_axi4_0_ar_bits_addr                  ( `MEM_NASTI.ar_addr                      ),
+      .mem_axi4_0_ar_bits_len                   ( `MEM_NASTI.ar_len                       ),
+      .mem_axi4_0_ar_bits_size                  ( `MEM_NASTI.ar_size                      ),
+      .mem_axi4_0_ar_bits_burst                 ( `MEM_NASTI.ar_burst                     ),
+      .mem_axi4_0_ar_bits_lock                  ( `MEM_NASTI.ar_lock                      ),
+      .mem_axi4_0_ar_bits_cache                 ( `MEM_NASTI.ar_cache                     ),
+      .mem_axi4_0_ar_bits_prot                  ( `MEM_NASTI.ar_prot                      ),
+      .mem_axi4_0_ar_bits_qos                   ( `MEM_NASTI.ar_qos                       ),
+      .mem_axi4_0_r_valid                       ( `MEM_NASTI.r_valid                      ),
+      .mem_axi4_0_r_ready                       ( `MEM_NASTI.r_ready                      ),
+      .mem_axi4_0_r_bits_id                     ( `MEM_NASTI.r_id                         ),
+      .mem_axi4_0_r_bits_data                   ( `MEM_NASTI.r_data                       ),
+      .mem_axi4_0_r_bits_resp                   ( `MEM_NASTI.r_resp                       ),
+      .mem_axi4_0_r_bits_last                   ( `MEM_NASTI.r_last                       ),
+      .mmio_axi4_0_aw_valid                     ( mmio_master_nasti.aw_valid               ),
+      .mmio_axi4_0_aw_ready                     ( mmio_master_nasti.aw_ready               ),
+      .mmio_axi4_0_aw_bits_id                   ( mmio_master_nasti.aw_id                  ),
+      .mmio_axi4_0_aw_bits_addr                 ( mmio_master_nasti.aw_addr                ),
+      .mmio_axi4_0_aw_bits_len                  ( mmio_master_nasti.aw_len                 ),
+      .mmio_axi4_0_aw_bits_size                 ( mmio_master_nasti.aw_size                ),
+      .mmio_axi4_0_aw_bits_burst                ( mmio_master_nasti.aw_burst               ),
+      .mmio_axi4_0_aw_bits_lock                 ( mmio_master_nasti.aw_lock                ),
+      .mmio_axi4_0_aw_bits_cache                ( mmio_master_nasti.aw_cache               ),
+      .mmio_axi4_0_aw_bits_prot                 ( mmio_master_nasti.aw_prot                ),
+      .mmio_axi4_0_aw_bits_qos                  ( mmio_master_nasti.aw_qos                 ),
+      .mmio_axi4_0_w_valid                      ( mmio_master_nasti.w_valid                ),
+      .mmio_axi4_0_w_ready                      ( mmio_master_nasti.w_ready                ),
+      .mmio_axi4_0_w_bits_data                  ( mmio_master_nasti.w_data                 ),
+      .mmio_axi4_0_w_bits_strb                  ( mmio_master_nasti.w_strb                 ),
+      .mmio_axi4_0_w_bits_last                  ( mmio_master_nasti.w_last                 ),
+      .mmio_axi4_0_b_valid                      ( mmio_master_nasti.b_valid                ),
+      .mmio_axi4_0_b_ready                      ( mmio_master_nasti.b_ready                ),
+      .mmio_axi4_0_b_bits_id                    ( mmio_master_nasti.b_id                   ),
+      .mmio_axi4_0_b_bits_resp                  ( mmio_master_nasti.b_resp                 ),
+      .mmio_axi4_0_ar_valid                     ( mmio_master_nasti.ar_valid               ),
+      .mmio_axi4_0_ar_ready                     ( mmio_master_nasti.ar_ready               ),
+      .mmio_axi4_0_ar_bits_id                   ( mmio_master_nasti.ar_id                  ),
+      .mmio_axi4_0_ar_bits_addr                 ( mmio_master_nasti.ar_addr                ),
+      .mmio_axi4_0_ar_bits_len                  ( mmio_master_nasti.ar_len                 ),
+      .mmio_axi4_0_ar_bits_size                 ( mmio_master_nasti.ar_size                ),
+      .mmio_axi4_0_ar_bits_burst                ( mmio_master_nasti.ar_burst               ),
+      .mmio_axi4_0_ar_bits_lock                 ( mmio_master_nasti.ar_lock                ),
+      .mmio_axi4_0_ar_bits_cache                ( mmio_master_nasti.ar_cache               ),
+      .mmio_axi4_0_ar_bits_prot                 ( mmio_master_nasti.ar_prot                ),
+      .mmio_axi4_0_ar_bits_qos                  ( mmio_master_nasti.ar_qos                 ),
+      .mmio_axi4_0_r_valid                      ( mmio_master_nasti.r_valid                ),
+      .mmio_axi4_0_r_ready                      ( mmio_master_nasti.r_ready                ),
+      .mmio_axi4_0_r_bits_id                    ( mmio_master_nasti.r_id                   ),
+      .mmio_axi4_0_r_bits_data                  ( mmio_master_nasti.r_data                 ),
+      .mmio_axi4_0_r_bits_resp                  ( mmio_master_nasti.r_resp                 ),
+      .mmio_axi4_0_r_bits_last                  ( mmio_master_nasti.r_last                 ),
+      .l2_frontend_bus_axi4_0_aw_valid          ( io_slave_nasti.aw_valid                ),
+      .l2_frontend_bus_axi4_0_aw_ready          ( io_slave_nasti.aw_ready                ),
+      .l2_frontend_bus_axi4_0_aw_bits_id        ( io_slave_nasti.aw_id                   ),
+      .l2_frontend_bus_axi4_0_aw_bits_addr      ( io_slave_nasti.aw_addr                 ),
+      .l2_frontend_bus_axi4_0_aw_bits_len       ( io_slave_nasti.aw_len                  ),
+      .l2_frontend_bus_axi4_0_aw_bits_size      ( io_slave_nasti.aw_size                 ),
+      .l2_frontend_bus_axi4_0_aw_bits_burst     ( io_slave_nasti.aw_burst                ),
+      .l2_frontend_bus_axi4_0_aw_bits_lock      ( io_slave_nasti.aw_lock                 ),
+      .l2_frontend_bus_axi4_0_aw_bits_cache     ( io_slave_nasti.aw_cache                ),
+      .l2_frontend_bus_axi4_0_aw_bits_prot      ( io_slave_nasti.aw_prot                 ),
+      .l2_frontend_bus_axi4_0_aw_bits_qos       ( io_slave_nasti.aw_qos                  ),
+      .l2_frontend_bus_axi4_0_w_valid           ( io_slave_nasti.w_valid                 ),
+      .l2_frontend_bus_axi4_0_w_ready           ( io_slave_nasti.w_ready                 ),
+      .l2_frontend_bus_axi4_0_w_bits_data       ( io_slave_nasti.w_data                  ),
+      .l2_frontend_bus_axi4_0_w_bits_strb       ( io_slave_nasti.w_strb                  ),
+      .l2_frontend_bus_axi4_0_w_bits_last       ( io_slave_nasti.w_last                  ),
+      .l2_frontend_bus_axi4_0_b_valid           ( io_slave_nasti.b_valid                 ),
+      .l2_frontend_bus_axi4_0_b_ready           ( io_slave_nasti.b_ready                 ),
+      .l2_frontend_bus_axi4_0_b_bits_id         ( io_slave_nasti.b_id                    ),
+      .l2_frontend_bus_axi4_0_b_bits_resp       ( io_slave_nasti.b_resp                  ),
+      .l2_frontend_bus_axi4_0_ar_valid          ( io_slave_nasti.ar_valid                ),
+      .l2_frontend_bus_axi4_0_ar_ready          ( io_slave_nasti.ar_ready                ),
+      .l2_frontend_bus_axi4_0_ar_bits_id        ( io_slave_nasti.ar_id                   ),
+      .l2_frontend_bus_axi4_0_ar_bits_addr      ( io_slave_nasti.ar_addr                 ),
+      .l2_frontend_bus_axi4_0_ar_bits_len       ( io_slave_nasti.ar_len                  ),
+      .l2_frontend_bus_axi4_0_ar_bits_size      ( io_slave_nasti.ar_size                 ),
+      .l2_frontend_bus_axi4_0_ar_bits_burst     ( io_slave_nasti.ar_burst                ),
+      .l2_frontend_bus_axi4_0_ar_bits_lock      ( io_slave_nasti.ar_lock                 ),
+      .l2_frontend_bus_axi4_0_ar_bits_cache     ( io_slave_nasti.ar_cache                ),
+      .l2_frontend_bus_axi4_0_ar_bits_prot      ( io_slave_nasti.ar_prot                 ),
+      .l2_frontend_bus_axi4_0_ar_bits_qos       ( io_slave_nasti.ar_qos                  ),
+      .l2_frontend_bus_axi4_0_r_valid           ( io_slave_nasti.r_valid                 ),
+      .l2_frontend_bus_axi4_0_r_ready           ( io_slave_nasti.r_ready                 ),
+      .l2_frontend_bus_axi4_0_r_bits_id         ( io_slave_nasti.r_id                    ),
+      .l2_frontend_bus_axi4_0_r_bits_data       ( io_slave_nasti.r_data                  ),
+      .l2_frontend_bus_axi4_0_r_bits_resp       ( io_slave_nasti.r_resp                  ),
+      .l2_frontend_bus_axi4_0_r_bits_last       ( io_slave_nasti.r_last                  ),
+      .interrupts                               ( {sd_irq, eth_irq, spi_irq, uart_irq}   ), //from psoc
+      .io_reset_vector                          ( io_reset_vector                        ),
+      .clock                                    ( clk                                    ), //external
+      .reset                                    ( sys_rst                                )  //external
+      );
+   
+
+endmodule // chip_top

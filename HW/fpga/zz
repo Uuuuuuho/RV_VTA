@@ -1,0 +1,681 @@
+Binary file bare_metal_tmp/driver/minion_lib.h.gch matches
+bare_metal_tmp/driver/minion_lib.h:336:#define get_card_status(_verbose) _get_card_status(__LINE__, _verbose)
+bare_metal_tmp/driver/minion_lib.h:338:extern uint32_t card_status[32];
+bare_metal_tmp/driver/minion_lib.h:341:extern void _get_card_status(int line, int verbose);
+bare_metal_tmp/driver/minion_helper.c:271:uint32_t card_status[32];
+bare_metal_tmp/driver/minion_helper.c:273:void _get_card_status(int line, int verbose)
+bare_metal_tmp/driver/minion_helper.c:276:  static uint32_t old_card_status[32];
+bare_metal_tmp/driver/minion_helper.c:277:  for (i = 0; i < sizeof(card_status)/sizeof(*card_status); i++)
+bare_metal_tmp/driver/minion_helper.c:278:    card_status[i] = sd_base[i];
+bare_metal_tmp/driver/minion_helper.c:280:  for (i = 0; i < 26; i++) if (verbose || (card_status[i] != old_card_status[i]))
+bare_metal_tmp/driver/minion_helper.c:282:	printf("line(%d), card_status[%d]=%8x\n", line, i, card_status[i]);
+bare_metal_tmp/driver/minion_helper.c:283:	old_card_status[i] = card_status[i];
+bare_metal_tmp/driver/minion_helper.c:293:  get_card_status(0);
+bare_metal_tmp/driver/minion_helper.c:300:  get_card_status(0);
+bare_metal_tmp/driver/minion_helper.c:303:  get_card_status(10);
+bare_metal_tmp/driver/minion_helper.c:395:	  data = card_status[i];
+bare_metal_tmp/driver/minion_helper.c:431:  get_card_status(0);
+bare_metal_tmp/driver/minion_helper.c:447:  get_card_status(1);
+bare_metal_tmp/driver/minion_helper.c:451:      get_card_status(0);
+bare_metal_tmp/driver/minion_helper.c:452:      stat = card_status[5];
+bare_metal_tmp/driver/minion_helper.c:455:  while ((wait != 0x100) && (card_status[4] < card_status[25]) && (timeout++ < 1000000));
+bare_metal_tmp/driver/minion_helper.c:458:  printf("%4x:%8x->", card_status[7], card_status[6]);
+bare_metal_tmp/driver/minion_helper.c:461:      printf("%8x,", card_status[i]);
+bare_metal_tmp/driver/minion_helper.c:463:  printf("%8x,%8x\n", card_status[5], card_status[4]);
+bare_metal_tmp/driver/minion_helper.c:466:  for (i = 0; i < sizeof(card_status)/sizeof(*card_status); i++)
+bare_metal_tmp/driver/minion_helper.c:467:    card_status[i] = sd_base[i];
+bare_metal_tmp/driver/minion_helper.c:468:  if (card_status[4] >= card_status[25])
+bare_metal_tmp/driver/minion_helper.c:480:           get_card_status(0);
+bare_metal_tmp/driver/minion_helper.c:481:           stat = card_status[5];
+bare_metal_tmp/driver/minion_helper.c:484:      while ((wait != 0x400) && (card_status[8] < card_status[25]));
+bare_metal_tmp/driver/minion_helper.c:485:      if ((card_status[8] < card_status[25]) && card_status[9])
+bare_metal_tmp/driver/minion_helper.c:602:	  get_card_status(0);
+bare_metal_tmp/driver/minion_helper.c:636:      get_card_status(0);      
+bare_metal_tmp/driver/minion_helper.c:651:	  get_card_status(0);
+bare_metal_tmp/driver/minion_helper.c:657:	  get_card_status(0);
+bare_metal_tmp/driver/minion_helper.c:663:	  get_card_status(0);
+bare_metal_tmp/driver/minion_helper.c:696:    case SDHCI_RESPONSE          : rslt = card_status[0]; break;
+bare_metal_tmp/driver/minion_helper.c:697:    case SDHCI_RESPONSE+4        : rslt = card_status[1]; break;
+bare_metal_tmp/driver/minion_helper.c:698:    case SDHCI_RESPONSE+8        : rslt = card_status[2]; break;
+bare_metal_tmp/driver/minion_helper.c:699:    case SDHCI_RESPONSE+12       : rslt = card_status[3]; break;
+bare_metal_tmp/driver/minion_helper.c:703:      sdhci_present_state = card_status[12] ? 0 : SDHCI_CARD_PRESENT;
+bare_metal_tmp/driver/minion_helper.c:742:  get_card_status(0);
+bare_metal_tmp/driver/minion_helper.c:745:  get_card_status(0);
+bare_metal_tmp/driver/minion_helper.c:747:  return card_status[0] & 0xFFFF0000U;
+bare_metal_tmp/driver/minion_helper.c:753:  printf("CMD%d:", card_status[19]);
+bare_metal_tmp/driver/minion_helper.c:754:  myputhex(card_status[7], 4);
+bare_metal_tmp/driver/minion_helper.c:756:  myputhex(card_status[6], 8);
+bare_metal_tmp/driver/minion_helper.c:761:      myputhex(card_status[i], 8);
+bare_metal_tmp/driver/minion_helper.c:764:  myputhex(card_status[5], 8);
+bare_metal_tmp/driver/minion_helper.c:766:  myputhex(card_status[4], 8);
+bare_metal_tmp/driver/minion_helper.c:820:  get_card_status(0);
+bare_metal_tmp/driver/minion_helper.c:821:  if (card_status[12])
+bare_metal_tmp/examples/selftest.c:457:  get_card_status(0);
+bare_metal_tmp/examples/selftest.c:458:  if (card_status[12])
+bare_metal_tmp/examples/dram.dis:6339:00000000400041b8 <_get_card_status.constprop.0>:
+bare_metal_tmp/examples/dram.dis:6344:    400041c6:	bb670713          	addi	a4,a4,-1098 # 40007d78 <card_status>
+bare_metal_tmp/examples/dram.dis:6346:    400041ce:	00d79363          	bne	a5,a3,400041d4 <_get_card_status.constprop.0+0x1c>
+bare_metal_tmp/examples/dram.dis:6352:    400041de:	bfc5                	j	400041ce <_get_card_status.constprop.0+0x16>
+bare_metal_tmp/examples/dram.dis:6584:00000000400043ae <_get_card_status>:
+bare_metal_tmp/examples/dram.dis:6589:    400043bc:	9c070713          	addi	a4,a4,-1600 # 40007d78 <card_status>
+bare_metal_tmp/examples/dram.dis:6591:    400043c4:	00d79363          	bne	a5,a3,400043ca <_get_card_status+0x1c>
+bare_metal_tmp/examples/dram.dis:6597:    400043d4:	bfc5                	j	400043c4 <_get_card_status+0x16>
+bare_metal_tmp/examples/dram.dis:6613:    400043f8:	dc1ff0ef          	jal	ra,400041b8 <_get_card_status.constprop.0>
+bare_metal_tmp/examples/dram.dis:6621:    40004410:	da9ff0ef          	jal	ra,400041b8 <_get_card_status.constprop.0>
+bare_metal_tmp/examples/dram.dis:6630:    40004426:	d93ff06f          	j	400041b8 <_get_card_status.constprop.0>
+bare_metal_tmp/examples/dram.dis:6646:    40004446:	93648493          	addi	s1,s1,-1738 # 40007d78 <card_status>
+bare_metal_tmp/examples/dram.dis:6778:    400045cc:	7b0a0a13          	addi	s4,s4,1968 # 40007d78 <card_status>
+bare_metal_tmp/examples/dram.dis:6779:    400045d0:	be9ff0ef          	jal	ra,400041b8 <_get_card_status.constprop.0>
+bare_metal_tmp/examples/dram.dis:6782:    400045da:	bdfff0ef          	jal	ra,400041b8 <_get_card_status.constprop.0>
+bare_metal_tmp/examples/dram.dis:6788:    400045ee:	78e70713          	addi	a4,a4,1934 # 40007d78 <card_status>
+bare_metal_tmp/examples/dram.dis:6805:    40004628:	b91ff0ef          	jal	ra,400041b8 <_get_card_status.constprop.0>
+bare_metal_tmp/examples/dram.dis:6985:    4000482a:	98fff0ef          	jal	ra,400041b8 <_get_card_status.constprop.0>
+bare_metal_tmp/examples/dram.dis:7075:    4000494c:	86dff0ef          	jal	ra,400041b8 <_get_card_status.constprop.0>
+bare_metal_tmp/examples/dram.dis:7128:    400049f6:	fc2ff0ef          	jal	ra,400041b8 <_get_card_status.constprop.0>
+bare_metal_tmp/examples/dram.dis:7220:    40004b26:	e92ff0ef          	jal	ra,400041b8 <_get_card_status.constprop.0>
+bare_metal_tmp/examples/dram.dis:7297:    40004c10:	16c78793          	addi	a5,a5,364 # 40007d78 <card_status>
+bare_metal_tmp/examples/dram.dis:7306:    40004c30:	14c78793          	addi	a5,a5,332 # 40007d78 <card_status>
+bare_metal_tmp/examples/dram.dis:7383:    40004d3e:	03e78793          	addi	a5,a5,62 # 40007d78 <card_status>
+bare_metal_tmp/examples/dram.dis:7386:    40004d48:	03478793          	addi	a5,a5,52 # 40007d78 <card_status>
+bare_metal_tmp/examples/dram.dis:7390:    40004d54:	02878793          	addi	a5,a5,40 # 40007d78 <card_status>
+bare_metal_tmp/examples/dram.dis:7424:    40004db8:	fc440413          	addi	s0,s0,-60 # 40007d78 <card_status>
+bare_metal_tmp/examples/dram.dis:7487:    40004e66:	b52ff0ef          	jal	ra,400041b8 <_get_card_status.constprop.0>
+bare_metal_tmp/examples/dram.dis:7493:    40004e7a:	b3eff0ef          	jal	ra,400041b8 <_get_card_status.constprop.0>
+bare_metal_tmp/examples/dram.dis:7496:    40004e86:	ef678793          	addi	a5,a5,-266 # 40007d78 <card_status>
+bare_metal_tmp/examples/dram.dis:7627:    40004fe8:	9d0ff0ef          	jal	ra,400041b8 <_get_card_status.constprop.0>
+bare_metal_tmp/examples/dram.dis:7629:    40004ff0:	d8c78793          	addi	a5,a5,-628 # 40007d78 <card_status>
+bare_metal_tmp/examples/mapfile:162:                0x00000000400043ae                _get_card_status
+bare_metal_tmp/examples/mapfile:350:                0x0000000040007d78                card_status
+Binary file bare_metal_tmp/examples/mmc matches
+bare_metal/driver/minion_lib.h:336:#define get_card_status(_verbose) _get_card_status(__LINE__, _verbose)
+bare_metal/driver/minion_lib.h:338:extern uint32_t card_status[32];
+bare_metal/driver/minion_lib.h:341:extern void _get_card_status(int line, int verbose);
+bare_metal/driver/minion_helper.c:271:uint32_t card_status[32];
+bare_metal/driver/minion_helper.c:273:void _get_card_status(int line, int verbose)
+bare_metal/driver/minion_helper.c:276:  static uint32_t old_card_status[32];
+bare_metal/driver/minion_helper.c:277:  for (i = 0; i < sizeof(card_status)/sizeof(*card_status); i++)
+bare_metal/driver/minion_helper.c:278:    card_status[i] = sd_base[i];
+bare_metal/driver/minion_helper.c:280:  for (i = 0; i < 26; i++) if (verbose || (card_status[i] != old_card_status[i]))
+bare_metal/driver/minion_helper.c:282:	printf("line(%d), card_status[%d]=%8x\n", line, i, card_status[i]);
+bare_metal/driver/minion_helper.c:283:	old_card_status[i] = card_status[i];
+bare_metal/driver/minion_helper.c:293:  get_card_status(0);
+bare_metal/driver/minion_helper.c:300:  get_card_status(0);
+bare_metal/driver/minion_helper.c:303:  get_card_status(10);
+bare_metal/driver/minion_helper.c:395:	  data = card_status[i];
+bare_metal/driver/minion_helper.c:431:  get_card_status(0);
+bare_metal/driver/minion_helper.c:447:  get_card_status(1);
+bare_metal/driver/minion_helper.c:451:      get_card_status(0);
+bare_metal/driver/minion_helper.c:452:      stat = card_status[5];
+bare_metal/driver/minion_helper.c:455:  while ((wait != 0x100) && (card_status[4] < card_status[25]) && (timeout++ < 1000000));
+bare_metal/driver/minion_helper.c:458:  printf("%4x:%8x->", card_status[7], card_status[6]);
+bare_metal/driver/minion_helper.c:461:      printf("%8x,", card_status[i]);
+bare_metal/driver/minion_helper.c:463:  printf("%8x,%8x\n", card_status[5], card_status[4]);
+bare_metal/driver/minion_helper.c:466:  for (i = 0; i < sizeof(card_status)/sizeof(*card_status); i++)
+bare_metal/driver/minion_helper.c:467:    card_status[i] = sd_base[i];
+bare_metal/driver/minion_helper.c:468:  if (card_status[4] >= card_status[25])
+bare_metal/driver/minion_helper.c:480:           get_card_status(0);
+bare_metal/driver/minion_helper.c:481:           stat = card_status[5];
+bare_metal/driver/minion_helper.c:484:      while ((wait != 0x400) && (card_status[8] < card_status[25]));
+bare_metal/driver/minion_helper.c:485:      if ((card_status[8] < card_status[25]) && card_status[9])
+bare_metal/driver/minion_helper.c:602:	  get_card_status(0);
+bare_metal/driver/minion_helper.c:636:      get_card_status(0);      
+bare_metal/driver/minion_helper.c:651:	  get_card_status(0);
+bare_metal/driver/minion_helper.c:657:	  get_card_status(0);
+bare_metal/driver/minion_helper.c:663:	  get_card_status(0);
+bare_metal/driver/minion_helper.c:696:    case SDHCI_RESPONSE          : rslt = card_status[0]; break;
+bare_metal/driver/minion_helper.c:697:    case SDHCI_RESPONSE+4        : rslt = card_status[1]; break;
+bare_metal/driver/minion_helper.c:698:    case SDHCI_RESPONSE+8        : rslt = card_status[2]; break;
+bare_metal/driver/minion_helper.c:699:    case SDHCI_RESPONSE+12       : rslt = card_status[3]; break;
+bare_metal/driver/minion_helper.c:703:      sdhci_present_state = card_status[12] ? 0 : SDHCI_CARD_PRESENT;
+bare_metal/driver/minion_helper.c:742:  get_card_status(0);
+bare_metal/driver/minion_helper.c:745:  get_card_status(0);
+bare_metal/driver/minion_helper.c:747:  return card_status[0] & 0xFFFF0000U;
+bare_metal/driver/minion_helper.c:753:  printf("CMD%d:", card_status[19]);
+bare_metal/driver/minion_helper.c:754:  myputhex(card_status[7], 4);
+bare_metal/driver/minion_helper.c:756:  myputhex(card_status[6], 8);
+bare_metal/driver/minion_helper.c:761:      myputhex(card_status[i], 8);
+bare_metal/driver/minion_helper.c:764:  myputhex(card_status[5], 8);
+bare_metal/driver/minion_helper.c:766:  myputhex(card_status[4], 8);
+bare_metal/driver/minion_helper.c:820:  get_card_status(0);
+bare_metal/driver/minion_helper.c:821:  if (card_status[12])
+bare_metal/examples/selftest.c:456:  get_card_status(0);
+bare_metal/examples/selftest.c:457:  if (card_status[12])
+Binary file bare_metal/examples/mmc matches
+board/kc705/examples_tmp/flash.dis:4790:0000000040003216 <_get_card_status.constprop.0>:
+board/kc705/examples_tmp/flash.dis:4795:    40003224:	70070713          	addi	a4,a4,1792 # 40006920 <card_status>
+board/kc705/examples_tmp/flash.dis:4797:    4000322c:	00d79363          	bne	a5,a3,40003232 <_get_card_status.constprop.0+0x1c>
+board/kc705/examples_tmp/flash.dis:4803:    4000323c:	bfc5                	j	4000322c <_get_card_status.constprop.0+0x16>
+board/kc705/examples_tmp/flash.dis:5035:000000004000340c <_get_card_status>:
+board/kc705/examples_tmp/flash.dis:5040:    4000341a:	50a70713          	addi	a4,a4,1290 # 40006920 <card_status>
+board/kc705/examples_tmp/flash.dis:5042:    40003422:	00d79363          	bne	a5,a3,40003428 <_get_card_status+0x1c>
+board/kc705/examples_tmp/flash.dis:5048:    40003432:	bfc5                	j	40003422 <_get_card_status+0x16>
+board/kc705/examples_tmp/flash.dis:5064:    40003456:	dc1ff0ef          	jal	ra,40003216 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/flash.dis:5072:    4000346e:	da9ff0ef          	jal	ra,40003216 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/flash.dis:5081:    40003484:	d93ff06f          	j	40003216 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/flash.dis:5097:    400034a4:	48048493          	addi	s1,s1,1152 # 40006920 <card_status>
+board/kc705/examples_tmp/flash.dis:5229:    4000362a:	2faa0a13          	addi	s4,s4,762 # 40006920 <card_status>
+board/kc705/examples_tmp/flash.dis:5230:    4000362e:	be9ff0ef          	jal	ra,40003216 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/flash.dis:5233:    40003638:	bdfff0ef          	jal	ra,40003216 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/flash.dis:5239:    4000364c:	2d870713          	addi	a4,a4,728 # 40006920 <card_status>
+board/kc705/examples_tmp/flash.dis:5256:    40003686:	b91ff0ef          	jal	ra,40003216 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/flash.dis:5436:    40003888:	98fff0ef          	jal	ra,40003216 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/flash.dis:5526:    400039aa:	86dff0ef          	jal	ra,40003216 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/flash.dis:5579:    40003a54:	fc2ff0ef          	jal	ra,40003216 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/flash.dis:5671:    40003b84:	e92ff0ef          	jal	ra,40003216 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/flash.dis:5748:    40003c6e:	cb678793          	addi	a5,a5,-842 # 40006920 <card_status>
+board/kc705/examples_tmp/flash.dis:5757:    40003c8e:	c9678793          	addi	a5,a5,-874 # 40006920 <card_status>
+board/kc705/examples_tmp/flash.dis:5834:    40003d9c:	b8878793          	addi	a5,a5,-1144 # 40006920 <card_status>
+board/kc705/examples_tmp/flash.dis:5837:    40003da6:	b7e78793          	addi	a5,a5,-1154 # 40006920 <card_status>
+board/kc705/examples_tmp/flash.dis:5841:    40003db2:	b7278793          	addi	a5,a5,-1166 # 40006920 <card_status>
+board/kc705/examples_tmp/flash.dis:5875:    40003e16:	b0e40413          	addi	s0,s0,-1266 # 40006920 <card_status>
+board/kc705/examples_tmp/flash.dis:5938:    40003ec4:	b52ff0ef          	jal	ra,40003216 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/flash.dis:5944:    40003ed8:	b3eff0ef          	jal	ra,40003216 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/flash.dis:5947:    40003ee4:	a4078793          	addi	a5,a5,-1472 # 40006920 <card_status>
+board/kc705/examples_tmp/flash.dis:6078:    40004046:	9d0ff0ef          	jal	ra,40003216 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/flash.dis:6080:    4000404e:	8d678793          	addi	a5,a5,-1834 # 40006920 <card_status>
+board/kc705/examples_tmp/dram.dis:6339:00000000400041b8 <_get_card_status.constprop.0>:
+board/kc705/examples_tmp/dram.dis:6344:    400041c6:	bb670713          	addi	a4,a4,-1098 # 40007d78 <card_status>
+board/kc705/examples_tmp/dram.dis:6346:    400041ce:	00d79363          	bne	a5,a3,400041d4 <_get_card_status.constprop.0+0x1c>
+board/kc705/examples_tmp/dram.dis:6352:    400041de:	bfc5                	j	400041ce <_get_card_status.constprop.0+0x16>
+board/kc705/examples_tmp/dram.dis:6584:00000000400043ae <_get_card_status>:
+board/kc705/examples_tmp/dram.dis:6589:    400043bc:	9c070713          	addi	a4,a4,-1600 # 40007d78 <card_status>
+board/kc705/examples_tmp/dram.dis:6591:    400043c4:	00d79363          	bne	a5,a3,400043ca <_get_card_status+0x1c>
+board/kc705/examples_tmp/dram.dis:6597:    400043d4:	bfc5                	j	400043c4 <_get_card_status+0x16>
+board/kc705/examples_tmp/dram.dis:6613:    400043f8:	dc1ff0ef          	jal	ra,400041b8 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/dram.dis:6621:    40004410:	da9ff0ef          	jal	ra,400041b8 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/dram.dis:6630:    40004426:	d93ff06f          	j	400041b8 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/dram.dis:6646:    40004446:	93648493          	addi	s1,s1,-1738 # 40007d78 <card_status>
+board/kc705/examples_tmp/dram.dis:6778:    400045cc:	7b0a0a13          	addi	s4,s4,1968 # 40007d78 <card_status>
+board/kc705/examples_tmp/dram.dis:6779:    400045d0:	be9ff0ef          	jal	ra,400041b8 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/dram.dis:6782:    400045da:	bdfff0ef          	jal	ra,400041b8 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/dram.dis:6788:    400045ee:	78e70713          	addi	a4,a4,1934 # 40007d78 <card_status>
+board/kc705/examples_tmp/dram.dis:6805:    40004628:	b91ff0ef          	jal	ra,400041b8 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/dram.dis:6985:    4000482a:	98fff0ef          	jal	ra,400041b8 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/dram.dis:7075:    4000494c:	86dff0ef          	jal	ra,400041b8 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/dram.dis:7128:    400049f6:	fc2ff0ef          	jal	ra,400041b8 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/dram.dis:7220:    40004b26:	e92ff0ef          	jal	ra,400041b8 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/dram.dis:7297:    40004c10:	16c78793          	addi	a5,a5,364 # 40007d78 <card_status>
+board/kc705/examples_tmp/dram.dis:7306:    40004c30:	14c78793          	addi	a5,a5,332 # 40007d78 <card_status>
+board/kc705/examples_tmp/dram.dis:7383:    40004d3e:	03e78793          	addi	a5,a5,62 # 40007d78 <card_status>
+board/kc705/examples_tmp/dram.dis:7386:    40004d48:	03478793          	addi	a5,a5,52 # 40007d78 <card_status>
+board/kc705/examples_tmp/dram.dis:7390:    40004d54:	02878793          	addi	a5,a5,40 # 40007d78 <card_status>
+board/kc705/examples_tmp/dram.dis:7424:    40004db8:	fc440413          	addi	s0,s0,-60 # 40007d78 <card_status>
+board/kc705/examples_tmp/dram.dis:7487:    40004e66:	b52ff0ef          	jal	ra,400041b8 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/dram.dis:7493:    40004e7a:	b3eff0ef          	jal	ra,400041b8 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/dram.dis:7496:    40004e86:	ef678793          	addi	a5,a5,-266 # 40007d78 <card_status>
+board/kc705/examples_tmp/dram.dis:7627:    40004fe8:	9d0ff0ef          	jal	ra,400041b8 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/dram.dis:7629:    40004ff0:	d8c78793          	addi	a5,a5,-628 # 40007d78 <card_status>
+board/kc705/examples_tmp/jump.dis:4787:0000000040003214 <_get_card_status.constprop.0>:
+board/kc705/examples_tmp/jump.dis:4792:    40003222:	66a70713          	addi	a4,a4,1642 # 40006888 <card_status>
+board/kc705/examples_tmp/jump.dis:4794:    4000322a:	00d79363          	bne	a5,a3,40003230 <_get_card_status.constprop.0+0x1c>
+board/kc705/examples_tmp/jump.dis:4800:    4000323a:	bfc5                	j	4000322a <_get_card_status.constprop.0+0x16>
+board/kc705/examples_tmp/jump.dis:5032:000000004000340a <_get_card_status>:
+board/kc705/examples_tmp/jump.dis:5037:    40003418:	47470713          	addi	a4,a4,1140 # 40006888 <card_status>
+board/kc705/examples_tmp/jump.dis:5039:    40003420:	00d79363          	bne	a5,a3,40003426 <_get_card_status+0x1c>
+board/kc705/examples_tmp/jump.dis:5045:    40003430:	bfc5                	j	40003420 <_get_card_status+0x16>
+board/kc705/examples_tmp/jump.dis:5061:    40003454:	dc1ff0ef          	jal	ra,40003214 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/jump.dis:5069:    4000346c:	da9ff0ef          	jal	ra,40003214 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/jump.dis:5078:    40003482:	d93ff06f          	j	40003214 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/jump.dis:5094:    400034a2:	3ea48493          	addi	s1,s1,1002 # 40006888 <card_status>
+board/kc705/examples_tmp/jump.dis:5226:    40003628:	264a0a13          	addi	s4,s4,612 # 40006888 <card_status>
+board/kc705/examples_tmp/jump.dis:5227:    4000362c:	be9ff0ef          	jal	ra,40003214 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/jump.dis:5230:    40003636:	bdfff0ef          	jal	ra,40003214 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/jump.dis:5236:    4000364a:	24270713          	addi	a4,a4,578 # 40006888 <card_status>
+board/kc705/examples_tmp/jump.dis:5253:    40003684:	b91ff0ef          	jal	ra,40003214 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/jump.dis:5433:    40003886:	98fff0ef          	jal	ra,40003214 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/jump.dis:5523:    400039a8:	86dff0ef          	jal	ra,40003214 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/jump.dis:5576:    40003a52:	fc2ff0ef          	jal	ra,40003214 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/jump.dis:5668:    40003b82:	e92ff0ef          	jal	ra,40003214 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/jump.dis:5745:    40003c6c:	c2078793          	addi	a5,a5,-992 # 40006888 <card_status>
+board/kc705/examples_tmp/jump.dis:5754:    40003c8c:	c0078793          	addi	a5,a5,-1024 # 40006888 <card_status>
+board/kc705/examples_tmp/jump.dis:5831:    40003d9a:	af278793          	addi	a5,a5,-1294 # 40006888 <card_status>
+board/kc705/examples_tmp/jump.dis:5834:    40003da4:	ae878793          	addi	a5,a5,-1304 # 40006888 <card_status>
+board/kc705/examples_tmp/jump.dis:5838:    40003db0:	adc78793          	addi	a5,a5,-1316 # 40006888 <card_status>
+board/kc705/examples_tmp/jump.dis:5872:    40003e14:	a7840413          	addi	s0,s0,-1416 # 40006888 <card_status>
+board/kc705/examples_tmp/jump.dis:5935:    40003ec2:	b52ff0ef          	jal	ra,40003214 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/jump.dis:5941:    40003ed6:	b3eff0ef          	jal	ra,40003214 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/jump.dis:5944:    40003ee2:	9aa78793          	addi	a5,a5,-1622 # 40006888 <card_status>
+board/kc705/examples_tmp/jump.dis:6075:    40004044:	9d0ff0ef          	jal	ra,40003214 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/jump.dis:6077:    4000404c:	84078793          	addi	a5,a5,-1984 # 40006888 <card_status>
+board/kc705/examples_tmp/hello.dis:4793:0000000040003228 <_get_card_status.constprop.0>:
+board/kc705/examples_tmp/hello.dis:4798:    40003236:	a3670713          	addi	a4,a4,-1482 # 40006c68 <card_status>
+board/kc705/examples_tmp/hello.dis:4800:    4000323e:	00d79363          	bne	a5,a3,40003244 <_get_card_status.constprop.0+0x1c>
+board/kc705/examples_tmp/hello.dis:4806:    4000324e:	bfc5                	j	4000323e <_get_card_status.constprop.0+0x16>
+board/kc705/examples_tmp/hello.dis:5038:000000004000341e <_get_card_status>:
+board/kc705/examples_tmp/hello.dis:5043:    4000342c:	84070713          	addi	a4,a4,-1984 # 40006c68 <card_status>
+board/kc705/examples_tmp/hello.dis:5045:    40003434:	00d79363          	bne	a5,a3,4000343a <_get_card_status+0x1c>
+board/kc705/examples_tmp/hello.dis:5051:    40003444:	bfc5                	j	40003434 <_get_card_status+0x16>
+board/kc705/examples_tmp/hello.dis:5067:    40003468:	dc1ff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/hello.dis:5075:    40003480:	da9ff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/hello.dis:5084:    40003496:	d93ff06f          	j	40003228 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/hello.dis:5100:    400034b6:	7b648493          	addi	s1,s1,1974 # 40006c68 <card_status>
+board/kc705/examples_tmp/hello.dis:5232:    4000363c:	630a0a13          	addi	s4,s4,1584 # 40006c68 <card_status>
+board/kc705/examples_tmp/hello.dis:5233:    40003640:	be9ff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/hello.dis:5236:    4000364a:	bdfff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/hello.dis:5242:    4000365e:	60e70713          	addi	a4,a4,1550 # 40006c68 <card_status>
+board/kc705/examples_tmp/hello.dis:5259:    40003698:	b91ff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/hello.dis:5439:    4000389a:	98fff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/hello.dis:5529:    400039bc:	86dff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/hello.dis:5582:    40003a66:	fc2ff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/hello.dis:5674:    40003b96:	e92ff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/hello.dis:5751:    40003c80:	fec78793          	addi	a5,a5,-20 # 40006c68 <card_status>
+board/kc705/examples_tmp/hello.dis:5760:    40003ca0:	fcc78793          	addi	a5,a5,-52 # 40006c68 <card_status>
+board/kc705/examples_tmp/hello.dis:5837:    40003dae:	ebe78793          	addi	a5,a5,-322 # 40006c68 <card_status>
+board/kc705/examples_tmp/hello.dis:5840:    40003db8:	eb478793          	addi	a5,a5,-332 # 40006c68 <card_status>
+board/kc705/examples_tmp/hello.dis:5844:    40003dc4:	ea878793          	addi	a5,a5,-344 # 40006c68 <card_status>
+board/kc705/examples_tmp/hello.dis:5878:    40003e28:	e4440413          	addi	s0,s0,-444 # 40006c68 <card_status>
+board/kc705/examples_tmp/hello.dis:5941:    40003ed6:	b52ff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/hello.dis:5947:    40003eea:	b3eff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/hello.dis:5950:    40003ef6:	d7678793          	addi	a5,a5,-650 # 40006c68 <card_status>
+board/kc705/examples_tmp/hello.dis:6081:    40004058:	9d0ff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/hello.dis:6083:    40004060:	c0c78793          	addi	a5,a5,-1012 # 40006c68 <card_status>
+board/kc705/examples_tmp/mapfile:165:                0x00000000400034fe                _get_card_status
+board/kc705/examples_tmp/mapfile:346:                0x0000000040007f48                card_status
+board/kc705/examples_tmp/sdcard.dis:4793:0000000040003228 <_get_card_status.constprop.0>:
+board/kc705/examples_tmp/sdcard.dis:4798:    40003236:	a4670713          	addi	a4,a4,-1466 # 40006c78 <card_status>
+board/kc705/examples_tmp/sdcard.dis:4800:    4000323e:	00d79363          	bne	a5,a3,40003244 <_get_card_status.constprop.0+0x1c>
+board/kc705/examples_tmp/sdcard.dis:4806:    4000324e:	bfc5                	j	4000323e <_get_card_status.constprop.0+0x16>
+board/kc705/examples_tmp/sdcard.dis:5038:000000004000341e <_get_card_status>:
+board/kc705/examples_tmp/sdcard.dis:5043:    4000342c:	85070713          	addi	a4,a4,-1968 # 40006c78 <card_status>
+board/kc705/examples_tmp/sdcard.dis:5045:    40003434:	00d79363          	bne	a5,a3,4000343a <_get_card_status+0x1c>
+board/kc705/examples_tmp/sdcard.dis:5051:    40003444:	bfc5                	j	40003434 <_get_card_status+0x16>
+board/kc705/examples_tmp/sdcard.dis:5067:    40003468:	dc1ff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/sdcard.dis:5075:    40003480:	da9ff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/sdcard.dis:5084:    40003496:	d93ff06f          	j	40003228 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/sdcard.dis:5100:    400034b6:	7c648493          	addi	s1,s1,1990 # 40006c78 <card_status>
+board/kc705/examples_tmp/sdcard.dis:5232:    4000363c:	640a0a13          	addi	s4,s4,1600 # 40006c78 <card_status>
+board/kc705/examples_tmp/sdcard.dis:5233:    40003640:	be9ff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/sdcard.dis:5236:    4000364a:	bdfff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/sdcard.dis:5242:    4000365e:	61e70713          	addi	a4,a4,1566 # 40006c78 <card_status>
+board/kc705/examples_tmp/sdcard.dis:5259:    40003698:	b91ff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/sdcard.dis:5439:    4000389a:	98fff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/sdcard.dis:5529:    400039bc:	86dff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/sdcard.dis:5582:    40003a66:	fc2ff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/sdcard.dis:5674:    40003b96:	e92ff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/sdcard.dis:5751:    40003c80:	ffc78793          	addi	a5,a5,-4 # 40006c78 <card_status>
+board/kc705/examples_tmp/sdcard.dis:5760:    40003ca0:	fdc78793          	addi	a5,a5,-36 # 40006c78 <card_status>
+board/kc705/examples_tmp/sdcard.dis:5837:    40003dae:	ece78793          	addi	a5,a5,-306 # 40006c78 <card_status>
+board/kc705/examples_tmp/sdcard.dis:5840:    40003db8:	ec478793          	addi	a5,a5,-316 # 40006c78 <card_status>
+board/kc705/examples_tmp/sdcard.dis:5844:    40003dc4:	eb878793          	addi	a5,a5,-328 # 40006c78 <card_status>
+board/kc705/examples_tmp/sdcard.dis:5878:    40003e28:	e5440413          	addi	s0,s0,-428 # 40006c78 <card_status>
+board/kc705/examples_tmp/sdcard.dis:5941:    40003ed6:	b52ff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/sdcard.dis:5947:    40003eea:	b3eff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/sdcard.dis:5950:    40003ef6:	d8678793          	addi	a5,a5,-634 # 40006c78 <card_status>
+board/kc705/examples_tmp/sdcard.dis:6081:    40004058:	9d0ff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples_tmp/sdcard.dis:6083:    40004060:	c1c78793          	addi	a5,a5,-996 # 40006c78 <card_status>
+Binary file board/kc705/examples/diskio.o matches
+board/kc705/examples/dram.dis:6410:000000004000428a <_get_card_status.constprop.0>:
+board/kc705/examples/dram.dis:6415:    40004298:	cb470713          	addi	a4,a4,-844 # 40007f48 <card_status>
+board/kc705/examples/dram.dis:6417:    400042a0:	00d79363          	bne	a5,a3,400042a6 <_get_card_status.constprop.0+0x1c>
+board/kc705/examples/dram.dis:6423:    400042b0:	bfc5                	j	400042a0 <_get_card_status.constprop.0+0x16>
+board/kc705/examples/dram.dis:6655:0000000040004480 <_get_card_status>:
+board/kc705/examples/dram.dis:6660:    4000448e:	abe70713          	addi	a4,a4,-1346 # 40007f48 <card_status>
+board/kc705/examples/dram.dis:6662:    40004496:	00d79363          	bne	a5,a3,4000449c <_get_card_status+0x1c>
+board/kc705/examples/dram.dis:6668:    400044a6:	bfc5                	j	40004496 <_get_card_status+0x16>
+board/kc705/examples/dram.dis:6684:    400044ca:	dc1ff0ef          	jal	ra,4000428a <_get_card_status.constprop.0>
+board/kc705/examples/dram.dis:6692:    400044e2:	da9ff0ef          	jal	ra,4000428a <_get_card_status.constprop.0>
+board/kc705/examples/dram.dis:6701:    400044f8:	d93ff06f          	j	4000428a <_get_card_status.constprop.0>
+board/kc705/examples/dram.dis:6717:    40004518:	a3448493          	addi	s1,s1,-1484 # 40007f48 <card_status>
+board/kc705/examples/dram.dis:6849:    4000469e:	8aea0a13          	addi	s4,s4,-1874 # 40007f48 <card_status>
+board/kc705/examples/dram.dis:6850:    400046a2:	be9ff0ef          	jal	ra,4000428a <_get_card_status.constprop.0>
+board/kc705/examples/dram.dis:6853:    400046ac:	bdfff0ef          	jal	ra,4000428a <_get_card_status.constprop.0>
+board/kc705/examples/dram.dis:6859:    400046c0:	88c70713          	addi	a4,a4,-1908 # 40007f48 <card_status>
+board/kc705/examples/dram.dis:6876:    400046fa:	b91ff0ef          	jal	ra,4000428a <_get_card_status.constprop.0>
+board/kc705/examples/dram.dis:7056:    400048fc:	98fff0ef          	jal	ra,4000428a <_get_card_status.constprop.0>
+board/kc705/examples/dram.dis:7146:    40004a1e:	86dff0ef          	jal	ra,4000428a <_get_card_status.constprop.0>
+board/kc705/examples/dram.dis:7199:    40004ac8:	fc2ff0ef          	jal	ra,4000428a <_get_card_status.constprop.0>
+board/kc705/examples/dram.dis:7291:    40004bf8:	e92ff0ef          	jal	ra,4000428a <_get_card_status.constprop.0>
+board/kc705/examples/dram.dis:7368:    40004ce2:	26a78793          	addi	a5,a5,618 # 40007f48 <card_status>
+board/kc705/examples/dram.dis:7377:    40004d02:	24a78793          	addi	a5,a5,586 # 40007f48 <card_status>
+board/kc705/examples/dram.dis:7454:    40004e10:	13c78793          	addi	a5,a5,316 # 40007f48 <card_status>
+board/kc705/examples/dram.dis:7457:    40004e1a:	13278793          	addi	a5,a5,306 # 40007f48 <card_status>
+board/kc705/examples/dram.dis:7461:    40004e26:	12678793          	addi	a5,a5,294 # 40007f48 <card_status>
+board/kc705/examples/dram.dis:7495:    40004e8a:	0c240413          	addi	s0,s0,194 # 40007f48 <card_status>
+board/kc705/examples/dram.dis:7558:    40004f38:	b52ff0ef          	jal	ra,4000428a <_get_card_status.constprop.0>
+board/kc705/examples/dram.dis:7564:    40004f4c:	b3eff0ef          	jal	ra,4000428a <_get_card_status.constprop.0>
+board/kc705/examples/dram.dis:7567:    40004f58:	ff478793          	addi	a5,a5,-12 # 40007f48 <card_status>
+board/kc705/examples/dram.dis:7698:    400050ba:	9d0ff0ef          	jal	ra,4000428a <_get_card_status.constprop.0>
+board/kc705/examples/dram.dis:7700:    400050c2:	e8a78793          	addi	a5,a5,-374 # 40007f48 <card_status>
+Binary file board/kc705/examples/boot.riscv matches
+board/kc705/examples/jump.dis:4787:0000000040003214 <_get_card_status.constprop.0>:
+board/kc705/examples/jump.dis:4792:    40003222:	6aa70713          	addi	a4,a4,1706 # 400068c8 <card_status>
+board/kc705/examples/jump.dis:4794:    4000322a:	00d79363          	bne	a5,a3,40003230 <_get_card_status.constprop.0+0x1c>
+board/kc705/examples/jump.dis:4800:    4000323a:	bfc5                	j	4000322a <_get_card_status.constprop.0+0x16>
+board/kc705/examples/jump.dis:5032:000000004000340a <_get_card_status>:
+board/kc705/examples/jump.dis:5037:    40003418:	4b470713          	addi	a4,a4,1204 # 400068c8 <card_status>
+board/kc705/examples/jump.dis:5039:    40003420:	00d79363          	bne	a5,a3,40003426 <_get_card_status+0x1c>
+board/kc705/examples/jump.dis:5045:    40003430:	bfc5                	j	40003420 <_get_card_status+0x16>
+board/kc705/examples/jump.dis:5061:    40003454:	dc1ff0ef          	jal	ra,40003214 <_get_card_status.constprop.0>
+board/kc705/examples/jump.dis:5069:    4000346c:	da9ff0ef          	jal	ra,40003214 <_get_card_status.constprop.0>
+board/kc705/examples/jump.dis:5078:    40003482:	d93ff06f          	j	40003214 <_get_card_status.constprop.0>
+board/kc705/examples/jump.dis:5094:    400034a2:	42a48493          	addi	s1,s1,1066 # 400068c8 <card_status>
+board/kc705/examples/jump.dis:5226:    40003628:	2a4a0a13          	addi	s4,s4,676 # 400068c8 <card_status>
+board/kc705/examples/jump.dis:5227:    4000362c:	be9ff0ef          	jal	ra,40003214 <_get_card_status.constprop.0>
+board/kc705/examples/jump.dis:5230:    40003636:	bdfff0ef          	jal	ra,40003214 <_get_card_status.constprop.0>
+board/kc705/examples/jump.dis:5236:    4000364a:	28270713          	addi	a4,a4,642 # 400068c8 <card_status>
+board/kc705/examples/jump.dis:5253:    40003684:	b91ff0ef          	jal	ra,40003214 <_get_card_status.constprop.0>
+board/kc705/examples/jump.dis:5433:    40003886:	98fff0ef          	jal	ra,40003214 <_get_card_status.constprop.0>
+board/kc705/examples/jump.dis:5523:    400039a8:	86dff0ef          	jal	ra,40003214 <_get_card_status.constprop.0>
+board/kc705/examples/jump.dis:5576:    40003a52:	fc2ff0ef          	jal	ra,40003214 <_get_card_status.constprop.0>
+board/kc705/examples/jump.dis:5668:    40003b82:	e92ff0ef          	jal	ra,40003214 <_get_card_status.constprop.0>
+board/kc705/examples/jump.dis:5745:    40003c6c:	c6078793          	addi	a5,a5,-928 # 400068c8 <card_status>
+board/kc705/examples/jump.dis:5754:    40003c8c:	c4078793          	addi	a5,a5,-960 # 400068c8 <card_status>
+board/kc705/examples/jump.dis:5831:    40003d9a:	b3278793          	addi	a5,a5,-1230 # 400068c8 <card_status>
+board/kc705/examples/jump.dis:5834:    40003da4:	b2878793          	addi	a5,a5,-1240 # 400068c8 <card_status>
+board/kc705/examples/jump.dis:5838:    40003db0:	b1c78793          	addi	a5,a5,-1252 # 400068c8 <card_status>
+board/kc705/examples/jump.dis:5872:    40003e14:	ab840413          	addi	s0,s0,-1352 # 400068c8 <card_status>
+board/kc705/examples/jump.dis:5935:    40003ec2:	b52ff0ef          	jal	ra,40003214 <_get_card_status.constprop.0>
+board/kc705/examples/jump.dis:5941:    40003ed6:	b3eff0ef          	jal	ra,40003214 <_get_card_status.constprop.0>
+board/kc705/examples/jump.dis:5944:    40003ee2:	9ea78793          	addi	a5,a5,-1558 # 400068c8 <card_status>
+board/kc705/examples/jump.dis:6075:    40004044:	9d0ff0ef          	jal	ra,40003214 <_get_card_status.constprop.0>
+board/kc705/examples/jump.dis:6077:    4000404c:	88078793          	addi	a5,a5,-1920 # 400068c8 <card_status>
+Binary file board/kc705/examples/minion_helper.o matches
+board/kc705/examples/hello.dis:4858:00000000400032ea <_get_card_status.constprop.0>:
+board/kc705/examples/hello.dis:4863:    400032f8:	b4470713          	addi	a4,a4,-1212 # 40006e38 <card_status>
+board/kc705/examples/hello.dis:4865:    40003300:	00d79363          	bne	a5,a3,40003306 <_get_card_status.constprop.0+0x1c>
+board/kc705/examples/hello.dis:4871:    40003310:	bfc5                	j	40003300 <_get_card_status.constprop.0+0x16>
+board/kc705/examples/hello.dis:5103:00000000400034e0 <_get_card_status>:
+board/kc705/examples/hello.dis:5108:    400034ee:	94e70713          	addi	a4,a4,-1714 # 40006e38 <card_status>
+board/kc705/examples/hello.dis:5110:    400034f6:	00d79363          	bne	a5,a3,400034fc <_get_card_status+0x1c>
+board/kc705/examples/hello.dis:5116:    40003506:	bfc5                	j	400034f6 <_get_card_status+0x16>
+board/kc705/examples/hello.dis:5132:    4000352a:	dc1ff0ef          	jal	ra,400032ea <_get_card_status.constprop.0>
+board/kc705/examples/hello.dis:5140:    40003542:	da9ff0ef          	jal	ra,400032ea <_get_card_status.constprop.0>
+board/kc705/examples/hello.dis:5149:    40003558:	d93ff06f          	j	400032ea <_get_card_status.constprop.0>
+board/kc705/examples/hello.dis:5165:    40003578:	8c448493          	addi	s1,s1,-1852 # 40006e38 <card_status>
+board/kc705/examples/hello.dis:5297:    400036fe:	73ea0a13          	addi	s4,s4,1854 # 40006e38 <card_status>
+board/kc705/examples/hello.dis:5298:    40003702:	be9ff0ef          	jal	ra,400032ea <_get_card_status.constprop.0>
+board/kc705/examples/hello.dis:5301:    4000370c:	bdfff0ef          	jal	ra,400032ea <_get_card_status.constprop.0>
+board/kc705/examples/hello.dis:5307:    40003720:	71c70713          	addi	a4,a4,1820 # 40006e38 <card_status>
+board/kc705/examples/hello.dis:5324:    4000375a:	b91ff0ef          	jal	ra,400032ea <_get_card_status.constprop.0>
+board/kc705/examples/hello.dis:5504:    4000395c:	98fff0ef          	jal	ra,400032ea <_get_card_status.constprop.0>
+board/kc705/examples/hello.dis:5594:    40003a7e:	86dff0ef          	jal	ra,400032ea <_get_card_status.constprop.0>
+board/kc705/examples/hello.dis:5647:    40003b28:	fc2ff0ef          	jal	ra,400032ea <_get_card_status.constprop.0>
+board/kc705/examples/hello.dis:5739:    40003c58:	e92ff0ef          	jal	ra,400032ea <_get_card_status.constprop.0>
+board/kc705/examples/hello.dis:5816:    40003d42:	0fa78793          	addi	a5,a5,250 # 40006e38 <card_status>
+board/kc705/examples/hello.dis:5825:    40003d62:	0da78793          	addi	a5,a5,218 # 40006e38 <card_status>
+board/kc705/examples/hello.dis:5902:    40003e70:	fcc78793          	addi	a5,a5,-52 # 40006e38 <card_status>
+board/kc705/examples/hello.dis:5905:    40003e7a:	fc278793          	addi	a5,a5,-62 # 40006e38 <card_status>
+board/kc705/examples/hello.dis:5909:    40003e86:	fb678793          	addi	a5,a5,-74 # 40006e38 <card_status>
+board/kc705/examples/hello.dis:5943:    40003eea:	f5240413          	addi	s0,s0,-174 # 40006e38 <card_status>
+board/kc705/examples/hello.dis:6006:    40003f98:	b52ff0ef          	jal	ra,400032ea <_get_card_status.constprop.0>
+board/kc705/examples/hello.dis:6012:    40003fac:	b3eff0ef          	jal	ra,400032ea <_get_card_status.constprop.0>
+board/kc705/examples/hello.dis:6015:    40003fb8:	e8478793          	addi	a5,a5,-380 # 40006e38 <card_status>
+board/kc705/examples/hello.dis:6146:    4000411a:	9d0ff0ef          	jal	ra,400032ea <_get_card_status.constprop.0>
+board/kc705/examples/hello.dis:6148:    40004122:	d1a78793          	addi	a5,a5,-742 # 40006e38 <card_status>
+board/kc705/examples/mapfile:166:                0x0000000040003512                _get_card_status
+board/kc705/examples/mapfile:352:                0x0000000040007f58                card_status
+board/kc705/examples/sdcard.dis:4793:0000000040003228 <_get_card_status.constprop.0>:
+board/kc705/examples/sdcard.dis:4798:    40003236:	a4670713          	addi	a4,a4,-1466 # 40006c78 <card_status>
+board/kc705/examples/sdcard.dis:4800:    4000323e:	00d79363          	bne	a5,a3,40003244 <_get_card_status.constprop.0+0x1c>
+board/kc705/examples/sdcard.dis:4806:    4000324e:	bfc5                	j	4000323e <_get_card_status.constprop.0+0x16>
+board/kc705/examples/sdcard.dis:5038:000000004000341e <_get_card_status>:
+board/kc705/examples/sdcard.dis:5043:    4000342c:	85070713          	addi	a4,a4,-1968 # 40006c78 <card_status>
+board/kc705/examples/sdcard.dis:5045:    40003434:	00d79363          	bne	a5,a3,4000343a <_get_card_status+0x1c>
+board/kc705/examples/sdcard.dis:5051:    40003444:	bfc5                	j	40003434 <_get_card_status+0x16>
+board/kc705/examples/sdcard.dis:5067:    40003468:	dc1ff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples/sdcard.dis:5075:    40003480:	da9ff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples/sdcard.dis:5084:    40003496:	d93ff06f          	j	40003228 <_get_card_status.constprop.0>
+board/kc705/examples/sdcard.dis:5100:    400034b6:	7c648493          	addi	s1,s1,1990 # 40006c78 <card_status>
+board/kc705/examples/sdcard.dis:5232:    4000363c:	640a0a13          	addi	s4,s4,1600 # 40006c78 <card_status>
+board/kc705/examples/sdcard.dis:5233:    40003640:	be9ff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples/sdcard.dis:5236:    4000364a:	bdfff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples/sdcard.dis:5242:    4000365e:	61e70713          	addi	a4,a4,1566 # 40006c78 <card_status>
+board/kc705/examples/sdcard.dis:5259:    40003698:	b91ff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples/sdcard.dis:5439:    4000389a:	98fff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples/sdcard.dis:5529:    400039bc:	86dff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples/sdcard.dis:5582:    40003a66:	fc2ff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples/sdcard.dis:5674:    40003b96:	e92ff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples/sdcard.dis:5751:    40003c80:	ffc78793          	addi	a5,a5,-4 # 40006c78 <card_status>
+board/kc705/examples/sdcard.dis:5760:    40003ca0:	fdc78793          	addi	a5,a5,-36 # 40006c78 <card_status>
+board/kc705/examples/sdcard.dis:5837:    40003dae:	ece78793          	addi	a5,a5,-306 # 40006c78 <card_status>
+board/kc705/examples/sdcard.dis:5840:    40003db8:	ec478793          	addi	a5,a5,-316 # 40006c78 <card_status>
+board/kc705/examples/sdcard.dis:5844:    40003dc4:	eb878793          	addi	a5,a5,-328 # 40006c78 <card_status>
+board/kc705/examples/sdcard.dis:5878:    40003e28:	e5440413          	addi	s0,s0,-428 # 40006c78 <card_status>
+board/kc705/examples/sdcard.dis:5941:    40003ed6:	b52ff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples/sdcard.dis:5947:    40003eea:	b3eff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples/sdcard.dis:5950:    40003ef6:	d8678793          	addi	a5,a5,-634 # 40006c78 <card_status>
+board/kc705/examples/sdcard.dis:6081:    40004058:	9d0ff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples/sdcard.dis:6083:    40004060:	c1c78793          	addi	a5,a5,-996 # 40006c78 <card_status>
+board/kc705/examples/boot.dis:4944:000000004000331c <_get_card_status.constprop.0>:
+board/kc705/examples/boot.dis:4949:    4000332a:	c3270713          	addi	a4,a4,-974 # 40007f58 <card_status>
+board/kc705/examples/boot.dis:4951:    40003332:	00d79363          	bne	a5,a3,40003338 <_get_card_status.constprop.0+0x1c>
+board/kc705/examples/boot.dis:4957:    40003342:	bfc5                	j	40003332 <_get_card_status.constprop.0+0x16>
+board/kc705/examples/boot.dis:5189:0000000040003512 <_get_card_status>:
+board/kc705/examples/boot.dis:5194:    40003520:	a3c70713          	addi	a4,a4,-1476 # 40007f58 <card_status>
+board/kc705/examples/boot.dis:5196:    40003528:	00d79363          	bne	a5,a3,4000352e <_get_card_status+0x1c>
+board/kc705/examples/boot.dis:5202:    40003538:	bfc5                	j	40003528 <_get_card_status+0x16>
+board/kc705/examples/boot.dis:5218:    4000355c:	dc1ff0ef          	jal	ra,4000331c <_get_card_status.constprop.0>
+board/kc705/examples/boot.dis:5226:    40003574:	da9ff0ef          	jal	ra,4000331c <_get_card_status.constprop.0>
+board/kc705/examples/boot.dis:5235:    4000358a:	d93ff06f          	j	4000331c <_get_card_status.constprop.0>
+board/kc705/examples/boot.dis:5251:    400035aa:	9b248493          	addi	s1,s1,-1614 # 40007f58 <card_status>
+board/kc705/examples/boot.dis:5383:    40003730:	82ca0a13          	addi	s4,s4,-2004 # 40007f58 <card_status>
+board/kc705/examples/boot.dis:5384:    40003734:	be9ff0ef          	jal	ra,4000331c <_get_card_status.constprop.0>
+board/kc705/examples/boot.dis:5387:    4000373e:	bdfff0ef          	jal	ra,4000331c <_get_card_status.constprop.0>
+board/kc705/examples/boot.dis:5393:    40003752:	80a70713          	addi	a4,a4,-2038 # 40007f58 <card_status>
+board/kc705/examples/boot.dis:5410:    4000378c:	b91ff0ef          	jal	ra,4000331c <_get_card_status.constprop.0>
+board/kc705/examples/boot.dis:5590:    4000398e:	98fff0ef          	jal	ra,4000331c <_get_card_status.constprop.0>
+board/kc705/examples/boot.dis:5680:    40003ab0:	86dff0ef          	jal	ra,4000331c <_get_card_status.constprop.0>
+board/kc705/examples/boot.dis:5733:    40003b5a:	fc2ff0ef          	jal	ra,4000331c <_get_card_status.constprop.0>
+board/kc705/examples/boot.dis:5825:    40003c8a:	e92ff0ef          	jal	ra,4000331c <_get_card_status.constprop.0>
+board/kc705/examples/boot.dis:5902:    40003d74:	1e878793          	addi	a5,a5,488 # 40007f58 <card_status>
+board/kc705/examples/boot.dis:5911:    40003d94:	1c878793          	addi	a5,a5,456 # 40007f58 <card_status>
+board/kc705/examples/boot.dis:5988:    40003ea2:	0ba78793          	addi	a5,a5,186 # 40007f58 <card_status>
+board/kc705/examples/boot.dis:5991:    40003eac:	0b078793          	addi	a5,a5,176 # 40007f58 <card_status>
+board/kc705/examples/boot.dis:5995:    40003eb8:	0a478793          	addi	a5,a5,164 # 40007f58 <card_status>
+board/kc705/examples/boot.dis:6029:    40003f1c:	04040413          	addi	s0,s0,64 # 40007f58 <card_status>
+board/kc705/examples/boot.dis:6092:    40003fca:	b52ff0ef          	jal	ra,4000331c <_get_card_status.constprop.0>
+board/kc705/examples/boot.dis:6098:    40003fde:	b3eff0ef          	jal	ra,4000331c <_get_card_status.constprop.0>
+board/kc705/examples/boot.dis:6101:    40003fea:	f7278793          	addi	a5,a5,-142 # 40007f58 <card_status>
+board/kc705/examples/boot.dis:6232:    4000414c:	9d0ff0ef          	jal	ra,4000331c <_get_card_status.constprop.0>
+board/kc705/examples/boot.dis:6234:    40004154:	e0878793          	addi	a5,a5,-504 # 40007f58 <card_status>
+board/kc705/examples/eth.dis:6083:00000000400041bc <_get_card_status.constprop.0>:
+board/kc705/examples/eth.dis:6088:    400041ca:	71a70713          	addi	a4,a4,1818 # 400088e0 <card_status>
+board/kc705/examples/eth.dis:6090:    400041d2:	00d79363          	bne	a5,a3,400041d8 <_get_card_status.constprop.0+0x1c>
+board/kc705/examples/eth.dis:6096:    400041e2:	bfc5                	j	400041d2 <_get_card_status.constprop.0+0x16>
+board/kc705/examples/eth.dis:6328:00000000400043b2 <_get_card_status>:
+board/kc705/examples/eth.dis:6333:    400043c0:	52470713          	addi	a4,a4,1316 # 400088e0 <card_status>
+board/kc705/examples/eth.dis:6335:    400043c8:	00d79363          	bne	a5,a3,400043ce <_get_card_status+0x1c>
+board/kc705/examples/eth.dis:6341:    400043d8:	bfc5                	j	400043c8 <_get_card_status+0x16>
+board/kc705/examples/eth.dis:6357:    400043fc:	dc1ff0ef          	jal	ra,400041bc <_get_card_status.constprop.0>
+board/kc705/examples/eth.dis:6365:    40004414:	da9ff0ef          	jal	ra,400041bc <_get_card_status.constprop.0>
+board/kc705/examples/eth.dis:6374:    4000442a:	d93ff06f          	j	400041bc <_get_card_status.constprop.0>
+board/kc705/examples/eth.dis:6390:    4000444a:	49a48493          	addi	s1,s1,1178 # 400088e0 <card_status>
+board/kc705/examples/eth.dis:6522:    400045d0:	314a0a13          	addi	s4,s4,788 # 400088e0 <card_status>
+board/kc705/examples/eth.dis:6523:    400045d4:	be9ff0ef          	jal	ra,400041bc <_get_card_status.constprop.0>
+board/kc705/examples/eth.dis:6526:    400045de:	bdfff0ef          	jal	ra,400041bc <_get_card_status.constprop.0>
+board/kc705/examples/eth.dis:6532:    400045f2:	2f270713          	addi	a4,a4,754 # 400088e0 <card_status>
+board/kc705/examples/eth.dis:6549:    4000462c:	b91ff0ef          	jal	ra,400041bc <_get_card_status.constprop.0>
+board/kc705/examples/eth.dis:6729:    4000482e:	98fff0ef          	jal	ra,400041bc <_get_card_status.constprop.0>
+board/kc705/examples/eth.dis:6819:    40004950:	86dff0ef          	jal	ra,400041bc <_get_card_status.constprop.0>
+board/kc705/examples/eth.dis:6872:    400049fa:	fc2ff0ef          	jal	ra,400041bc <_get_card_status.constprop.0>
+board/kc705/examples/eth.dis:6964:    40004b2a:	e92ff0ef          	jal	ra,400041bc <_get_card_status.constprop.0>
+board/kc705/examples/eth.dis:7041:    40004c14:	cd078793          	addi	a5,a5,-816 # 400088e0 <card_status>
+board/kc705/examples/eth.dis:7050:    40004c34:	cb078793          	addi	a5,a5,-848 # 400088e0 <card_status>
+board/kc705/examples/eth.dis:7127:    40004d42:	ba278793          	addi	a5,a5,-1118 # 400088e0 <card_status>
+board/kc705/examples/eth.dis:7130:    40004d4c:	b9878793          	addi	a5,a5,-1128 # 400088e0 <card_status>
+board/kc705/examples/eth.dis:7134:    40004d58:	b8c78793          	addi	a5,a5,-1140 # 400088e0 <card_status>
+board/kc705/examples/eth.dis:7168:    40004dbc:	b2840413          	addi	s0,s0,-1240 # 400088e0 <card_status>
+board/kc705/examples/eth.dis:7231:    40004e6a:	b52ff0ef          	jal	ra,400041bc <_get_card_status.constprop.0>
+board/kc705/examples/eth.dis:7237:    40004e7e:	b3eff0ef          	jal	ra,400041bc <_get_card_status.constprop.0>
+board/kc705/examples/eth.dis:7240:    40004e8a:	a5a78793          	addi	a5,a5,-1446 # 400088e0 <card_status>
+board/kc705/examples/eth.dis:7371:    40004fec:	9d0ff0ef          	jal	ra,400041bc <_get_card_status.constprop.0>
+board/kc705/examples/eth.dis:7373:    40004ff4:	8f078793          	addi	a5,a5,-1808 # 400088e0 <card_status>
+Binary file board/kc705/examples_done/diskio.o matches
+board/kc705/examples_done/dram.dis:6339:00000000400041b8 <_get_card_status.constprop.0>:
+board/kc705/examples_done/dram.dis:6344:    400041c6:	bb670713          	addi	a4,a4,-1098 # 40007d78 <card_status>
+board/kc705/examples_done/dram.dis:6346:    400041ce:	00d79363          	bne	a5,a3,400041d4 <_get_card_status.constprop.0+0x1c>
+board/kc705/examples_done/dram.dis:6352:    400041de:	bfc5                	j	400041ce <_get_card_status.constprop.0+0x16>
+board/kc705/examples_done/dram.dis:6584:00000000400043ae <_get_card_status>:
+board/kc705/examples_done/dram.dis:6589:    400043bc:	9c070713          	addi	a4,a4,-1600 # 40007d78 <card_status>
+board/kc705/examples_done/dram.dis:6591:    400043c4:	00d79363          	bne	a5,a3,400043ca <_get_card_status+0x1c>
+board/kc705/examples_done/dram.dis:6597:    400043d4:	bfc5                	j	400043c4 <_get_card_status+0x16>
+board/kc705/examples_done/dram.dis:6613:    400043f8:	dc1ff0ef          	jal	ra,400041b8 <_get_card_status.constprop.0>
+board/kc705/examples_done/dram.dis:6621:    40004410:	da9ff0ef          	jal	ra,400041b8 <_get_card_status.constprop.0>
+board/kc705/examples_done/dram.dis:6630:    40004426:	d93ff06f          	j	400041b8 <_get_card_status.constprop.0>
+board/kc705/examples_done/dram.dis:6646:    40004446:	93648493          	addi	s1,s1,-1738 # 40007d78 <card_status>
+board/kc705/examples_done/dram.dis:6778:    400045cc:	7b0a0a13          	addi	s4,s4,1968 # 40007d78 <card_status>
+board/kc705/examples_done/dram.dis:6779:    400045d0:	be9ff0ef          	jal	ra,400041b8 <_get_card_status.constprop.0>
+board/kc705/examples_done/dram.dis:6782:    400045da:	bdfff0ef          	jal	ra,400041b8 <_get_card_status.constprop.0>
+board/kc705/examples_done/dram.dis:6788:    400045ee:	78e70713          	addi	a4,a4,1934 # 40007d78 <card_status>
+board/kc705/examples_done/dram.dis:6805:    40004628:	b91ff0ef          	jal	ra,400041b8 <_get_card_status.constprop.0>
+board/kc705/examples_done/dram.dis:6985:    4000482a:	98fff0ef          	jal	ra,400041b8 <_get_card_status.constprop.0>
+board/kc705/examples_done/dram.dis:7075:    4000494c:	86dff0ef          	jal	ra,400041b8 <_get_card_status.constprop.0>
+board/kc705/examples_done/dram.dis:7128:    400049f6:	fc2ff0ef          	jal	ra,400041b8 <_get_card_status.constprop.0>
+board/kc705/examples_done/dram.dis:7220:    40004b26:	e92ff0ef          	jal	ra,400041b8 <_get_card_status.constprop.0>
+board/kc705/examples_done/dram.dis:7297:    40004c10:	16c78793          	addi	a5,a5,364 # 40007d78 <card_status>
+board/kc705/examples_done/dram.dis:7306:    40004c30:	14c78793          	addi	a5,a5,332 # 40007d78 <card_status>
+board/kc705/examples_done/dram.dis:7383:    40004d3e:	03e78793          	addi	a5,a5,62 # 40007d78 <card_status>
+board/kc705/examples_done/dram.dis:7386:    40004d48:	03478793          	addi	a5,a5,52 # 40007d78 <card_status>
+board/kc705/examples_done/dram.dis:7390:    40004d54:	02878793          	addi	a5,a5,40 # 40007d78 <card_status>
+board/kc705/examples_done/dram.dis:7424:    40004db8:	fc440413          	addi	s0,s0,-60 # 40007d78 <card_status>
+board/kc705/examples_done/dram.dis:7487:    40004e66:	b52ff0ef          	jal	ra,400041b8 <_get_card_status.constprop.0>
+board/kc705/examples_done/dram.dis:7493:    40004e7a:	b3eff0ef          	jal	ra,400041b8 <_get_card_status.constprop.0>
+board/kc705/examples_done/dram.dis:7496:    40004e86:	ef678793          	addi	a5,a5,-266 # 40007d78 <card_status>
+board/kc705/examples_done/dram.dis:7627:    40004fe8:	9d0ff0ef          	jal	ra,400041b8 <_get_card_status.constprop.0>
+board/kc705/examples_done/dram.dis:7629:    40004ff0:	d8c78793          	addi	a5,a5,-628 # 40007d78 <card_status>
+Binary file board/kc705/examples_done/sdcard.riscv matches
+Binary file board/kc705/examples_done/minion_helper.o matches
+board/kc705/examples_done/hello.dis:4793:0000000040003228 <_get_card_status.constprop.0>:
+board/kc705/examples_done/hello.dis:4798:    40003236:	9f670713          	addi	a4,a4,-1546 # 40006c28 <card_status>
+board/kc705/examples_done/hello.dis:4800:    4000323e:	00d79363          	bne	a5,a3,40003244 <_get_card_status.constprop.0+0x1c>
+board/kc705/examples_done/hello.dis:4806:    4000324e:	bfc5                	j	4000323e <_get_card_status.constprop.0+0x16>
+board/kc705/examples_done/hello.dis:5038:000000004000341e <_get_card_status>:
+board/kc705/examples_done/hello.dis:5043:    4000342c:	80070713          	addi	a4,a4,-2048 # 40006c28 <card_status>
+board/kc705/examples_done/hello.dis:5045:    40003434:	00d79363          	bne	a5,a3,4000343a <_get_card_status+0x1c>
+board/kc705/examples_done/hello.dis:5051:    40003444:	bfc5                	j	40003434 <_get_card_status+0x16>
+board/kc705/examples_done/hello.dis:5067:    40003468:	dc1ff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples_done/hello.dis:5075:    40003480:	da9ff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples_done/hello.dis:5084:    40003496:	d93ff06f          	j	40003228 <_get_card_status.constprop.0>
+board/kc705/examples_done/hello.dis:5100:    400034b6:	77648493          	addi	s1,s1,1910 # 40006c28 <card_status>
+board/kc705/examples_done/hello.dis:5232:    4000363c:	5f0a0a13          	addi	s4,s4,1520 # 40006c28 <card_status>
+board/kc705/examples_done/hello.dis:5233:    40003640:	be9ff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples_done/hello.dis:5236:    4000364a:	bdfff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples_done/hello.dis:5242:    4000365e:	5ce70713          	addi	a4,a4,1486 # 40006c28 <card_status>
+board/kc705/examples_done/hello.dis:5259:    40003698:	b91ff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples_done/hello.dis:5439:    4000389a:	98fff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples_done/hello.dis:5529:    400039bc:	86dff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples_done/hello.dis:5582:    40003a66:	fc2ff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples_done/hello.dis:5674:    40003b96:	e92ff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples_done/hello.dis:5751:    40003c80:	fac78793          	addi	a5,a5,-84 # 40006c28 <card_status>
+board/kc705/examples_done/hello.dis:5760:    40003ca0:	f8c78793          	addi	a5,a5,-116 # 40006c28 <card_status>
+board/kc705/examples_done/hello.dis:5837:    40003dae:	e7e78793          	addi	a5,a5,-386 # 40006c28 <card_status>
+board/kc705/examples_done/hello.dis:5840:    40003db8:	e7478793          	addi	a5,a5,-396 # 40006c28 <card_status>
+board/kc705/examples_done/hello.dis:5844:    40003dc4:	e6878793          	addi	a5,a5,-408 # 40006c28 <card_status>
+board/kc705/examples_done/hello.dis:5878:    40003e28:	e0440413          	addi	s0,s0,-508 # 40006c28 <card_status>
+board/kc705/examples_done/hello.dis:5941:    40003ed6:	b52ff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples_done/hello.dis:5947:    40003eea:	b3eff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples_done/hello.dis:5950:    40003ef6:	d3678793          	addi	a5,a5,-714 # 40006c28 <card_status>
+board/kc705/examples_done/hello.dis:6081:    40004058:	9d0ff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples_done/hello.dis:6083:    40004060:	bcc78793          	addi	a5,a5,-1076 # 40006c28 <card_status>
+Binary file board/kc705/examples_done/dram.riscv matches
+board/kc705/examples_done/mapfile:165:                0x0000000040003542                _get_card_status
+board/kc705/examples_done/mapfile:346:                0x0000000040007f88                card_status
+Binary file board/kc705/examples_done/eth.riscv matches
+Binary file board/kc705/examples_done/hello.riscv matches
+board/kc705/examples_done/sdcard.dis:4793:0000000040003228 <_get_card_status.constprop.0>:
+board/kc705/examples_done/sdcard.dis:4798:    40003236:	a4670713          	addi	a4,a4,-1466 # 40006c78 <card_status>
+board/kc705/examples_done/sdcard.dis:4800:    4000323e:	00d79363          	bne	a5,a3,40003244 <_get_card_status.constprop.0+0x1c>
+board/kc705/examples_done/sdcard.dis:4806:    4000324e:	bfc5                	j	4000323e <_get_card_status.constprop.0+0x16>
+board/kc705/examples_done/sdcard.dis:5038:000000004000341e <_get_card_status>:
+board/kc705/examples_done/sdcard.dis:5043:    4000342c:	85070713          	addi	a4,a4,-1968 # 40006c78 <card_status>
+board/kc705/examples_done/sdcard.dis:5045:    40003434:	00d79363          	bne	a5,a3,4000343a <_get_card_status+0x1c>
+board/kc705/examples_done/sdcard.dis:5051:    40003444:	bfc5                	j	40003434 <_get_card_status+0x16>
+board/kc705/examples_done/sdcard.dis:5067:    40003468:	dc1ff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples_done/sdcard.dis:5075:    40003480:	da9ff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples_done/sdcard.dis:5084:    40003496:	d93ff06f          	j	40003228 <_get_card_status.constprop.0>
+board/kc705/examples_done/sdcard.dis:5100:    400034b6:	7c648493          	addi	s1,s1,1990 # 40006c78 <card_status>
+board/kc705/examples_done/sdcard.dis:5232:    4000363c:	640a0a13          	addi	s4,s4,1600 # 40006c78 <card_status>
+board/kc705/examples_done/sdcard.dis:5233:    40003640:	be9ff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples_done/sdcard.dis:5236:    4000364a:	bdfff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples_done/sdcard.dis:5242:    4000365e:	61e70713          	addi	a4,a4,1566 # 40006c78 <card_status>
+board/kc705/examples_done/sdcard.dis:5259:    40003698:	b91ff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples_done/sdcard.dis:5439:    4000389a:	98fff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples_done/sdcard.dis:5529:    400039bc:	86dff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples_done/sdcard.dis:5582:    40003a66:	fc2ff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples_done/sdcard.dis:5674:    40003b96:	e92ff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples_done/sdcard.dis:5751:    40003c80:	ffc78793          	addi	a5,a5,-4 # 40006c78 <card_status>
+board/kc705/examples_done/sdcard.dis:5760:    40003ca0:	fdc78793          	addi	a5,a5,-36 # 40006c78 <card_status>
+board/kc705/examples_done/sdcard.dis:5837:    40003dae:	ece78793          	addi	a5,a5,-306 # 40006c78 <card_status>
+board/kc705/examples_done/sdcard.dis:5840:    40003db8:	ec478793          	addi	a5,a5,-316 # 40006c78 <card_status>
+board/kc705/examples_done/sdcard.dis:5844:    40003dc4:	eb878793          	addi	a5,a5,-328 # 40006c78 <card_status>
+board/kc705/examples_done/sdcard.dis:5878:    40003e28:	e5440413          	addi	s0,s0,-428 # 40006c78 <card_status>
+board/kc705/examples_done/sdcard.dis:5941:    40003ed6:	b52ff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples_done/sdcard.dis:5947:    40003eea:	b3eff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples_done/sdcard.dis:5950:    40003ef6:	d8678793          	addi	a5,a5,-634 # 40006c78 <card_status>
+board/kc705/examples_done/sdcard.dis:6081:    40004058:	9d0ff0ef          	jal	ra,40003228 <_get_card_status.constprop.0>
+board/kc705/examples_done/sdcard.dis:6083:    40004060:	c1c78793          	addi	a5,a5,-996 # 40006c78 <card_status>
+board/kc705/examples_done/eth.dis:6083:00000000400041bc <_get_card_status.constprop.0>:
+board/kc705/examples_done/eth.dis:6088:    400041ca:	71270713          	addi	a4,a4,1810 # 400088d8 <card_status>
+board/kc705/examples_done/eth.dis:6090:    400041d2:	00d79363          	bne	a5,a3,400041d8 <_get_card_status.constprop.0+0x1c>
+board/kc705/examples_done/eth.dis:6096:    400041e2:	bfc5                	j	400041d2 <_get_card_status.constprop.0+0x16>
+board/kc705/examples_done/eth.dis:6328:00000000400043b2 <_get_card_status>:
+board/kc705/examples_done/eth.dis:6333:    400043c0:	51c70713          	addi	a4,a4,1308 # 400088d8 <card_status>
+board/kc705/examples_done/eth.dis:6335:    400043c8:	00d79363          	bne	a5,a3,400043ce <_get_card_status+0x1c>
+board/kc705/examples_done/eth.dis:6341:    400043d8:	bfc5                	j	400043c8 <_get_card_status+0x16>
+board/kc705/examples_done/eth.dis:6357:    400043fc:	dc1ff0ef          	jal	ra,400041bc <_get_card_status.constprop.0>
+board/kc705/examples_done/eth.dis:6365:    40004414:	da9ff0ef          	jal	ra,400041bc <_get_card_status.constprop.0>
+board/kc705/examples_done/eth.dis:6374:    4000442a:	d93ff06f          	j	400041bc <_get_card_status.constprop.0>
+board/kc705/examples_done/eth.dis:6390:    4000444a:	49248493          	addi	s1,s1,1170 # 400088d8 <card_status>
+board/kc705/examples_done/eth.dis:6522:    400045d0:	30ca0a13          	addi	s4,s4,780 # 400088d8 <card_status>
+board/kc705/examples_done/eth.dis:6523:    400045d4:	be9ff0ef          	jal	ra,400041bc <_get_card_status.constprop.0>
+board/kc705/examples_done/eth.dis:6526:    400045de:	bdfff0ef          	jal	ra,400041bc <_get_card_status.constprop.0>
+board/kc705/examples_done/eth.dis:6532:    400045f2:	2ea70713          	addi	a4,a4,746 # 400088d8 <card_status>
+board/kc705/examples_done/eth.dis:6549:    4000462c:	b91ff0ef          	jal	ra,400041bc <_get_card_status.constprop.0>
+board/kc705/examples_done/eth.dis:6729:    4000482e:	98fff0ef          	jal	ra,400041bc <_get_card_status.constprop.0>
+board/kc705/examples_done/eth.dis:6819:    40004950:	86dff0ef          	jal	ra,400041bc <_get_card_status.constprop.0>
+board/kc705/examples_done/eth.dis:6872:    400049fa:	fc2ff0ef          	jal	ra,400041bc <_get_card_status.constprop.0>
+board/kc705/examples_done/eth.dis:6964:    40004b2a:	e92ff0ef          	jal	ra,400041bc <_get_card_status.constprop.0>
+board/kc705/examples_done/eth.dis:7041:    40004c14:	cc878793          	addi	a5,a5,-824 # 400088d8 <card_status>
+board/kc705/examples_done/eth.dis:7050:    40004c34:	ca878793          	addi	a5,a5,-856 # 400088d8 <card_status>
+board/kc705/examples_done/eth.dis:7127:    40004d42:	b9a78793          	addi	a5,a5,-1126 # 400088d8 <card_status>
+board/kc705/examples_done/eth.dis:7130:    40004d4c:	b9078793          	addi	a5,a5,-1136 # 400088d8 <card_status>
+board/kc705/examples_done/eth.dis:7134:    40004d58:	b8478793          	addi	a5,a5,-1148 # 400088d8 <card_status>
+board/kc705/examples_done/eth.dis:7168:    40004dbc:	b2040413          	addi	s0,s0,-1248 # 400088d8 <card_status>
+board/kc705/examples_done/eth.dis:7231:    40004e6a:	b52ff0ef          	jal	ra,400041bc <_get_card_status.constprop.0>
+board/kc705/examples_done/eth.dis:7237:    40004e7e:	b3eff0ef          	jal	ra,400041bc <_get_card_status.constprop.0>
+board/kc705/examples_done/eth.dis:7240:    40004e8a:	a5278793          	addi	a5,a5,-1454 # 400088d8 <card_status>
+board/kc705/examples_done/eth.dis:7371:    40004fec:	9d0ff0ef          	jal	ra,400041bc <_get_card_status.constprop.0>
+board/kc705/examples_done/eth.dis:7373:    40004ff4:	8e878793          	addi	a5,a5,-1816 # 400088d8 <card_status>
+micropython/lib/stm32lib/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:656:#define PCCARD_StatusTypedef          HAL_PCCARD_StatusTypeDef
+micropython/lib/stm32lib/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:657:#define PCCARD_SUCCESS                HAL_PCCARD_STATUS_SUCCESS
+micropython/lib/stm32lib/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:658:#define PCCARD_ONGOING                HAL_PCCARD_STATUS_ONGOING
+micropython/lib/stm32lib/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:659:#define PCCARD_ERROR                  HAL_PCCARD_STATUS_ERROR
+micropython/lib/stm32lib/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:660:#define PCCARD_TIMEOUT                HAL_PCCARD_STATUS_TIMEOUT
+micropython/lib/stm32lib/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pccard.h:84:  HAL_PCCARD_STATUS_SUCCESS = 0U,
+micropython/lib/stm32lib/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pccard.h:85:  HAL_PCCARD_STATUS_ONGOING,
+micropython/lib/stm32lib/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pccard.h:86:  HAL_PCCARD_STATUS_ERROR,
+micropython/lib/stm32lib/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pccard.h:87:  HAL_PCCARD_STATUS_TIMEOUT
+micropython/lib/stm32lib/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pccard.h:88:}HAL_PCCARD_StatusTypeDef;
+micropython/lib/stm32lib/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pccard.h:160:HAL_PCCARD_StatusTypeDef HAL_PCCARD_GetStatus(PCCARD_HandleTypeDef *hpccard);
+micropython/lib/stm32lib/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pccard.h:161:HAL_PCCARD_StatusTypeDef HAL_PCCARD_ReadStatus(PCCARD_HandleTypeDef *hpccard);
+micropython/lib/stm32lib/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pccard.h:228:#define HAL_CF_STATUS_SUCCESS       HAL_PCCARD_STATUS_SUCCESS
+micropython/lib/stm32lib/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pccard.h:229:#define HAL_CF_STATUS_ONGOING       HAL_PCCARD_STATUS_ONGOING
+micropython/lib/stm32lib/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pccard.h:230:#define HAL_CF_STATUS_ERROR         HAL_PCCARD_STATUS_ERROR
+micropython/lib/stm32lib/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pccard.h:231:#define HAL_CF_STATUS_TIMEOUT       HAL_PCCARD_STATUS_TIMEOUT
+micropython/lib/stm32lib/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pccard.h:232:#define HAL_CF_StatusTypeDef        HAL_PCCARD_StatusTypeDef
+micropython/lib/stm32lib/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pccard.c:105:#define PCCARD_STATUS_OK                       (uint8_t)0x58
+micropython/lib/stm32lib/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pccard.c:106:#define PCCARD_STATUS_WRITE_OK                 (uint8_t)0x50
+micropython/lib/stm32lib/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pccard.c:294:  }while((status != PCCARD_STATUS_OK) && timeout);
+micropython/lib/stm32lib/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pccard.c:368:    /* wait till the Status = PCCARD_STATUS_OK */
+micropython/lib/stm32lib/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pccard.c:371:  }while((status != PCCARD_STATUS_OK) && timeout);
+micropython/lib/stm32lib/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pccard.c:430:    /* Wait till the Status = PCCARD_STATUS_OK */
+micropython/lib/stm32lib/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pccard.c:433:  }while((status != PCCARD_STATUS_OK) && timeout);
+micropython/lib/stm32lib/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pccard.c:448:    /* Wait till the Status = PCCARD_STATUS_WRITE_OK */
+micropython/lib/stm32lib/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pccard.c:451:  }while((status != PCCARD_STATUS_WRITE_OK) && timeout);
+micropython/lib/stm32lib/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pccard.c:507:  while((status != PCCARD_STATUS_WRITE_OK) && timeout)
+micropython/lib/stm32lib/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pccard.c:668:HAL_PCCARD_StatusTypeDef HAL_PCCARD_GetStatus(PCCARD_HandleTypeDef *hpccard)
+micropython/lib/stm32lib/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pccard.c:675:     return HAL_PCCARD_STATUS_ONGOING;
+micropython/lib/stm32lib/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pccard.c:692:  return (HAL_PCCARD_StatusTypeDef) status_pccard;
+micropython/lib/stm32lib/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pccard.c:704:HAL_PCCARD_StatusTypeDef HAL_PCCARD_ReadStatus(PCCARD_HandleTypeDef *hpccard)
+micropython/lib/stm32lib/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pccard.c:711:     return HAL_PCCARD_STATUS_ONGOING;
+micropython/lib/stm32lib/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pccard.c:726:  return (HAL_PCCARD_StatusTypeDef) status_pccard;
+micropython/lib/stm32lib/STM32L4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:656:#define PCCARD_StatusTypedef          HAL_PCCARD_StatusTypeDef
+micropython/lib/stm32lib/STM32L4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:657:#define PCCARD_SUCCESS                HAL_PCCARD_STATUS_SUCCESS
+micropython/lib/stm32lib/STM32L4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:658:#define PCCARD_ONGOING                HAL_PCCARD_STATUS_ONGOING
+micropython/lib/stm32lib/STM32L4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:659:#define PCCARD_ERROR                  HAL_PCCARD_STATUS_ERROR
+micropython/lib/stm32lib/STM32L4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:660:#define PCCARD_TIMEOUT                HAL_PCCARD_STATUS_TIMEOUT
+micropython/lib/stm32lib/STM32F7xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:656:#define PCCARD_StatusTypedef          HAL_PCCARD_StatusTypeDef
+micropython/lib/stm32lib/STM32F7xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:657:#define PCCARD_SUCCESS                HAL_PCCARD_STATUS_SUCCESS
+micropython/lib/stm32lib/STM32F7xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:658:#define PCCARD_ONGOING                HAL_PCCARD_STATUS_ONGOING
+micropython/lib/stm32lib/STM32F7xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:659:#define PCCARD_ERROR                  HAL_PCCARD_STATUS_ERROR
+micropython/lib/stm32lib/STM32F7xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:660:#define PCCARD_TIMEOUT                HAL_PCCARD_STATUS_TIMEOUT

@@ -1,0 +1,595 @@
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+LOAD /tmp/ccpw0cow.o
+LOAD syscalls.o
+LOAD hid.o
+LOAD memory.o
+LOAD memcmp.o
+LOAD memset.o
+LOAD strcmp.o
+LOAD strcpy.o
+LOAD strnlen.o
+LOAD wordcopy.o
+LOAD elf.o
+LOAD ff.o
+LOAD minion_helper.o
+LOAD sdhci-minion-hash-md5.o
+LOAD mini-printf.o
+LOAD random.o
+LOAD dhcp-client.o
+LOAD stublib.o
+LOAD diskio.o
+LOAD crt.o
+                0x0000000040000000                . = 0x40000000
+
+.text           0x0000000040000000     0x5cc6
+ crt.o(.text)
+ .text          0x0000000040000000      0x14a crt.o
+                0x0000000040000000                _start
+ *(.text)
+ .text          0x000000004000014a       0xf4 /tmp/ccpw0cow.o
+                0x000000004000014a                external_interrupt
+                0x000000004000014c                get_tbclk
+                0x0000000040000156                env_get
+                0x000000004000015a                malloc
+                0x000000004000017c                calloc
+                0x00000000400001a4                free
+                0x00000000400001a6                init_mmc_standalone
+                0x00000000400001a8                disk_initialize
+                0x00000000400001c0                ctrlc
+                0x00000000400001c4                find_cmd_tbl
+                0x00000000400001c8                timer_read_counter
+                0x00000000400001d4                __assert_fail
+                0x00000000400001f6                memalign
+                0x0000000040000214                do_load
+                0x0000000040000218                do_ls
+                0x000000004000021c                do_size
+                0x0000000040000220                disk_read
+                0x0000000040000224                disk_write
+                0x0000000040000228                disk_ioctl
+                0x000000004000022c                disk_status
+                0x0000000040000230                part_init
+                0x0000000040000232                part_print
+                0x0000000040000234                dev_print
+                0x0000000040000236                mmc_berase
+                0x000000004000023a                mmc_bwrite
+ .text          0x000000004000023e      0x33c syscalls.o
+                0x000000004000023e                tohost_exit
+                0x000000004000029c                handle_interrupt
+                0x000000004000029e                handle_trap
+                0x000000004000042a                thread_entry
+                0x000000004000042e                __bswap_16
+                0x000000004000043c                __bswap_32
+                0x0000000040000464                _init
+                0x000000004000053a                printhex
+ .text          0x000000004000057a      0x22e hid.o
+                0x000000004000057a                hid_console_putchar
+                0x000000004000069e                uart_console_putchar
+                0x00000000400006b4                hid_init
+                0x00000000400006b6                hid_send_irq
+                0x00000000400006b8                hid_send
+                0x00000000400006d0                hid_send_string
+                0x00000000400006ee                hid_send_buf
+                0x000000004000071c                hid_recv
+                0x0000000040000722                hid_check_read_irq
+                0x0000000040000738                hid_read_irq
+                0x000000004000076c                hid_enable_read_irq
+                0x000000004000076e                hid_disable_read_irq
+                0x0000000040000770                putc
+                0x0000000040000782                puts
+ .text          0x00000000400007a8       0x2c memory.o
+                0x00000000400007a8                get_bram_base
+                0x00000000400007ae                get_ddr_base
+                0x00000000400007b4                get_ddr_size
+                0x00000000400007ba                get_flash_base
+                0x00000000400007be                write_led
+                0x00000000400007ca                get_sw
+ .text          0x00000000400007d4       0x22 memcmp.o
+                0x00000000400007d4                memcmp
+ .text          0x00000000400007f6       0x8c memset.o
+                0x00000000400007f6                memset
+ .text          0x0000000040000882       0x1e strcmp.o
+                0x0000000040000882                strcmp
+ .text          0x00000000400008a0       0x12 strcpy.o
+                0x00000000400008a0                strcpy
+ .text          0x00000000400008b2       0xba strnlen.o
+                0x00000000400008b2                strnlen
+ .text          0x000000004000096c      0x2ec wordcopy.o
+                0x000000004000096c                _wordcopy_fwd_aligned
+                0x0000000040000a10                _wordcopy_fwd_dest_aligned
+                0x0000000040000aca                _wordcopy_bwd_aligned
+                0x0000000040000b90                _wordcopy_bwd_dest_aligned
+ .text          0x0000000040000c58      0x132 elf.o
+                0x0000000040000c58                load_elf
+ .text          0x0000000040000d8a     0x257e ff.o
+                0x0000000040001484                clust2sect
+                0x00000000400014a2                get_fat
+                0x00000000400016a6                put_fat
+                0x0000000040001e20                f_mount
+                0x0000000040001e7a                f_open
+                0x0000000040002008                f_read
+                0x00000000400021e4                f_write
+                0x00000000400023ea                f_sync
+                0x00000000400024e4                f_close
+                0x000000004000250a                f_chdrive
+                0x000000004000252e                f_chdir
+                0x0000000040002590                f_getcwd
+                0x00000000400026f8                f_lseek
+                0x0000000040002880                f_opendir
+                0x00000000400028fe                f_closedir
+                0x000000004000291a                f_readdir
+                0x000000004000298c                f_stat
+                0x00000000400029d8                f_getfree
+                0x0000000040002af0                f_truncate
+                0x0000000040002bc6                f_unlink
+                0x0000000040002c86                f_mkdir
+                0x0000000040002e9a                f_chmod
+                0x0000000040002f02                f_rename
+                0x0000000040003058                f_utime
+                0x00000000400030c8                f_getlabel
+                0x0000000040003188                f_setlabel
+ .text          0x0000000040003308     0x14d6 minion_helper.o
+                0x0000000040003330                myputchar
+                0x0000000040003334                sg_miter_next
+                0x0000000040003338                sg_miter_stop
+                0x000000004000333a                __be32_to_cpu
+                0x0000000040003362                sd_disable
+                0x0000000040003364                sd_send
+                0x0000000040003368                sd_send_multi
+                0x000000004000336a                sd_recv_multi
+                0x000000004000336c                sd_select_slave
+                0x000000004000336e                sd_deselect_slave
+                0x0000000040003370                wait_ready
+                0x0000000040003374                sd_deselect
+                0x0000000040003376                sd_select
+                0x000000004000337a                myputs
+                0x0000000040003398                myputn
+                0x00000000400033c4                myputhex
+                0x00000000400033fe                sd_resp
+                0x0000000040003412                sd_align
+                0x0000000040003420                sd_clk_div
+                0x000000004000342e                sd_arg
+                0x0000000040003440                sd_cmd
+                0x0000000040003452                sd_setting
+                0x0000000040003460                sd_cmd_start
+                0x000000004000346e                sd_reset
+                0x00000000400034ca                sd_blkcnt
+                0x00000000400034dc                sd_blksize
+                0x00000000400034f0                sd_timeout
+                0x00000000400034fe                _get_card_status
+                0x0000000040003526                board_mmc_power_init
+                0x000000004000357a                card_response
+                0x00000000400036de                sd_transaction_finish2
+                0x00000000400038a4                sd_transaction_finish
+                0x0000000040003990                sdhci_write
+                0x0000000040003cdc                sdhci_read
+                0x0000000040003f00                sd_transaction_show
+                0x0000000040003f90                sd_transaction_v
+                0x0000000040003fe8                sd_read_sector1
+                0x00000000400040bc                sd_read_sector
+                0x0000000040004108                init_sd
+                0x00000000400047d0                send_cmd
+                0x00000000400047d6                rcvr_datablock
+                0x00000000400047da                xmit_datablock
+ .text          0x00000000400047de      0x52a sdhci-minion-hash-md5.o
+                0x0000000040004b74                md5_hash
+                0x0000000040004bf6                md5_end
+                0x0000000040004c56                md5_begin
+                0x0000000040004c7e                hash_bin_to_hex
+                0x0000000040004cda                hash_buf
+ .text          0x0000000040004d08      0x2fe mini-printf.o
+                0x0000000040004e38                vsnprintf
+                0x0000000040004f90                snprintf
+                0x0000000040004fac                sprintf
+                0x0000000040004fd0                printf
+ .text          0x0000000040005006       0x42 random.o
+                0x0000000040005006                pcg32_random_r
+                0x000000004000503c                rand
+ .text          0x0000000040005048      0x86e dhcp-client.o
+                0x000000004000510e                lite_queue
+                0x00000000400052a6                dhcp_input
+                0x00000000400057a2                my_perror
+                0x00000000400057b0                udp_send
+                0x0000000040005842                dhcp_main
+ .text          0x00000000400058b6       0x88 stublib.o
+                0x00000000400058b6                memcpy
+                0x000000004000590c                strlen
+ .text          0x000000004000593e      0x388 diskio.o
+
+.text.startup   0x0000000040005cc6      0x19e
+ .text.startup  0x0000000040005cc6      0x19e /tmp/ccpw0cow.o
+                0x0000000040005cc6                main
+
+.rodata         0x0000000040005e68      0x228
+ .rodata        0x0000000040005e68       0x25 /tmp/ccpw0cow.o
+                0x0000000040005e68                version_string
+ *fill*         0x0000000040005e8d        0x3 
+ .rodata        0x0000000040005e90       0x30 syscalls.o
+ .rodata        0x0000000040005ec0       0x38 wordcopy.o
+ .rodata        0x0000000040005ef8       0x68 minion_helper.o
+ .rodata        0x0000000040005f60      0x130 sdhci-minion-hash-md5.o
+
+.rodata.str1.8  0x0000000040006090      0xb18
+ .rodata.str1.8
+                0x0000000040006090      0x1ec /tmp/ccpw0cow.o
+                                        0x1f4 (size before relaxing)
+ *fill*         0x000000004000627c        0x4 
+ .rodata.str1.8
+                0x0000000040006280      0x29e syscalls.o
+                                        0x2a6 (size before relaxing)
+ *fill*         0x000000004000651e        0x2 
+ .rodata.str1.8
+                0x0000000040006520       0x5c elf.o
+ *fill*         0x000000004000657c        0x4 
+ .rodata.str1.8
+                0x0000000040006580       0x20 ff.o
+ .rodata.str1.8
+                0x00000000400065a0      0x36a minion_helper.o
+ *fill*         0x000000004000690a        0x6 
+ .rodata.str1.8
+                0x0000000040006910       0x11 sdhci-minion-hash-md5.o
+ *fill*         0x0000000040006921        0x7 
+ .rodata.str1.8
+                0x0000000040006928      0x238 dhcp-client.o
+ .rodata.str1.8
+                0x0000000040006b60       0x48 stublib.o
+                                         0x43 (size before relaxing)
+
+.rela.dyn       0x0000000040006ba8        0x0
+ .rela.text     0x0000000040006ba8        0x0 /tmp/ccpw0cow.o
+ .rela.text.startup
+                0x0000000040006ba8        0x0 /tmp/ccpw0cow.o
+
+.data           0x0000000040006ba8        0x0
+ *(.data)
+ .data          0x0000000040006ba8        0x0 /tmp/ccpw0cow.o
+ .data          0x0000000040006ba8        0x0 syscalls.o
+ .data          0x0000000040006ba8        0x0 hid.o
+ .data          0x0000000040006ba8        0x0 memory.o
+ .data          0x0000000040006ba8        0x0 memcmp.o
+ .data          0x0000000040006ba8        0x0 memset.o
+ .data          0x0000000040006ba8        0x0 strcmp.o
+ .data          0x0000000040006ba8        0x0 strcpy.o
+ .data          0x0000000040006ba8        0x0 strnlen.o
+ .data          0x0000000040006ba8        0x0 wordcopy.o
+ .data          0x0000000040006ba8        0x0 elf.o
+ .data          0x0000000040006ba8        0x0 ff.o
+ .data          0x0000000040006ba8        0x0 minion_helper.o
+ .data          0x0000000040006ba8        0x0 sdhci-minion-hash-md5.o
+ .data          0x0000000040006ba8        0x0 mini-printf.o
+ .data          0x0000000040006ba8        0x0 random.o
+ .data          0x0000000040006ba8        0x0 dhcp-client.o
+ .data          0x0000000040006ba8        0x0 stublib.o
+ .data          0x0000000040006ba8        0x0 diskio.o
+ .data          0x0000000040006ba8        0x0 crt.o
+
+.sdata          0x0000000040006ba8       0x61
+                0x00000000400073a8                _gp = (. + 0x800)
+ *(.srodata.cst16)
+ *(.srodata.cst8)
+ .srodata.cst8  0x0000000040006ba8       0x10 strnlen.o
+ .srodata.cst8  0x0000000040006bb8       0x10 sdhci-minion-hash-md5.o
+ .srodata.cst8  0x0000000040006bc8        0x8 random.o
+ *(.srodata.cst4)
+ *(.srodata.cst2)
+ *(.srodata*)
+ *(.sdata .sdata.* .gnu.linkonce.s.*)
+ .sdata         0x0000000040006bd0       0x30 memory.o
+                0x0000000040006bd0                plic
+                0x0000000040006bd8                sd_bram
+                0x0000000040006be0                sd_base
+                0x0000000040006be8                eth_base
+                0x0000000040006bf0                hid_vga_ptr
+                0x0000000040006bf8                uart_base
+ .sdata         0x0000000040006c00        0x3 minion_helper.o
+ *fill*         0x0000000040006c03        0x1 
+ .sdata         0x0000000040006c04        0x4 dhcp-client.o
+                0x0000000040006c04                program_verbose_level
+ .sdata         0x0000000040006c08        0x1 diskio.o
+                0x0000000040006c09                _bss = .
+
+.sbss           0x0000000040006c10       0xe9
+ *(.sbss .sbss.* .gnu.linkonce.sb.*)
+ .sbss          0x0000000040006c10        0x8 /tmp/ccpw0cow.o
+ .sbss          0x0000000040006c18       0x4c syscalls.o
+                0x0000000040006c18                mac_addr
+                0x0000000040006c20                hid
+                0x0000000040006c28                clin
+                0x0000000040006c30                intc
+                0x0000000040006c38                bram
+                0x0000000040006c40                rom
+                0x0000000040006c48                ddr
+                0x0000000040006c50                eth
+                0x0000000040006c58                err
+                0x0000000040006c60                have_vec
+ .sbss          0x0000000040006c64        0x4 hid.o
+ .sbss          0x0000000040006c68       0x34 memory.o
+                0x0000000040006c68                txbuf
+                0x0000000040006c70                rxbuf
+                0x0000000040006c78                txtail
+                0x0000000040006c7c                txhead
+                0x0000000040006c80                rxtail
+                0x0000000040006c84                rxhead
+                0x0000000040006c88                uip_netmask
+                0x0000000040006c90                uip_draddr
+                0x0000000040006c98                uip_hostaddr
+ .sbss          0x0000000040006c9c        0x4 ff.o
+ .sbss          0x0000000040006ca0       0x54 minion_helper.o
+ .sbss          0x0000000040006cf4        0x4 dhcp-client.o
+                0x0000000040006cf4                ip
+ .sbss          0x0000000040006cf8        0x1 diskio.o
+ *(.scommon)
+
+.bss            0x0000000040006d00     0x1500
+ *(.bss)
+ .bss           0x0000000040006d00     0x1238 /tmp/ccpw0cow.o
+                0x0000000040006d00                FatFs
+                0x0000000040006f38                md5buf
+ .bss           0x0000000040007f38        0x0 syscalls.o
+ .bss           0x0000000040007f38        0x0 hid.o
+ .bss           0x0000000040007f38        0x0 memory.o
+ .bss           0x0000000040007f38        0x0 memcmp.o
+ .bss           0x0000000040007f38        0x0 memset.o
+ .bss           0x0000000040007f38        0x0 strcmp.o
+ .bss           0x0000000040007f38        0x0 strcpy.o
+ .bss           0x0000000040007f38        0x0 strnlen.o
+ .bss           0x0000000040007f38        0x0 wordcopy.o
+ .bss           0x0000000040007f38        0x0 elf.o
+ .bss           0x0000000040007f38       0x10 ff.o
+ .bss           0x0000000040007f48      0x280 minion_helper.o
+                0x0000000040007f48                card_status
+ .bss           0x00000000400081c8       0x21 sdhci-minion-hash-md5.o
+ .bss           0x00000000400081e9        0x0 mini-printf.o
+ *fill*         0x00000000400081e9        0x7 
+ .bss           0x00000000400081f0       0x10 random.o
+ .bss           0x0000000040008200        0x0 dhcp-client.o
+ .bss           0x0000000040008200        0x0 stublib.o
+ .bss           0x0000000040008200        0x0 diskio.o
+ .bss           0x0000000040008200        0x0 crt.o
+
+.tdata          0x0000000040008200        0x0
+                0x0000000040008200                _tls_data = .
+ crt.o(.tdata.begin)
+ .tdata.begin   0x0000000040008200        0x0 crt.o
+ *(.tdata)
+ crt.o(.tdata.end)
+ .tdata.end     0x0000000040008200        0x0 crt.o
+
+.tbss           0x0000000040008200        0x0
+ *(.tbss)
+ crt.o(.tbss.end)
+ .tbss.end      0x0000000040008200        0x0 crt.o
+                0x0000000040008200                _end = .
+OUTPUT(boot.riscv elf64-littleriscv)
+
+.debug_info     0x0000000000000000    0x16b4c
+ .debug_info    0x0000000000000000     0x183c /tmp/ccpw0cow.o
+ .debug_info    0x000000000000183c     0x11f9 syscalls.o
+ .debug_info    0x0000000000002a35      0xce0 hid.o
+ .debug_info    0x0000000000003715      0xd4a memory.o
+ .debug_info    0x000000000000445f       0xbe memcmp.o
+ .debug_info    0x000000000000451d      0x928 memset.o
+ .debug_info    0x0000000000004e45      0x919 strcmp.o
+ .debug_info    0x000000000000575e      0x8ef strcpy.o
+ .debug_info    0x000000000000604d      0x961 strnlen.o
+ .debug_info    0x00000000000069ae      0x442 wordcopy.o
+ .debug_info    0x0000000000006df0      0xc35 elf.o
+ .debug_info    0x0000000000007a25     0x3dda ff.o
+ .debug_info    0x000000000000b7ff     0x6055 minion_helper.o
+ .debug_info    0x0000000000011854     0x10db sdhci-minion-hash-md5.o
+ .debug_info    0x000000000001292f      0xf38 mini-printf.o
+ .debug_info    0x0000000000013867      0x174 random.o
+ .debug_info    0x00000000000139db     0x2134 dhcp-client.o
+ .debug_info    0x0000000000015b0f      0x9f0 stublib.o
+ .debug_info    0x00000000000164ff      0x61f diskio.o
+ .debug_info    0x0000000000016b1e       0x2e crt.o
+
+.debug_abbrev   0x0000000000000000     0x32d4
+ .debug_abbrev  0x0000000000000000      0x402 /tmp/ccpw0cow.o
+ .debug_abbrev  0x0000000000000402      0x43f syscalls.o
+ .debug_abbrev  0x0000000000000841      0x300 hid.o
+ .debug_abbrev  0x0000000000000b41      0x262 memory.o
+ .debug_abbrev  0x0000000000000da3       0x88 memcmp.o
+ .debug_abbrev  0x0000000000000e2b      0x1e8 memset.o
+ .debug_abbrev  0x0000000000001013      0x1d4 strcmp.o
+ .debug_abbrev  0x00000000000011e7      0x1d2 strcpy.o
+ .debug_abbrev  0x00000000000013b9      0x208 strnlen.o
+ .debug_abbrev  0x00000000000015c1      0x115 wordcopy.o
+ .debug_abbrev  0x00000000000016d6      0x234 elf.o
+ .debug_abbrev  0x000000000000190a      0x31d ff.o
+ .debug_abbrev  0x0000000000001c27      0x60c minion_helper.o
+ .debug_abbrev  0x0000000000002233      0x364 sdhci-minion-hash-md5.o
+ .debug_abbrev  0x0000000000002597      0x341 mini-printf.o
+ .debug_abbrev  0x00000000000028d8       0xdd random.o
+ .debug_abbrev  0x00000000000029b5      0x55b dhcp-client.o
+ .debug_abbrev  0x0000000000002f10      0x203 stublib.o
+ .debug_abbrev  0x0000000000003113      0x1ad diskio.o
+ .debug_abbrev  0x00000000000032c0       0x14 crt.o
+
+.debug_loc      0x0000000000000000    0x10170
+ .debug_loc     0x0000000000000000      0x729 /tmp/ccpw0cow.o
+ .debug_loc     0x0000000000000729      0x399 syscalls.o
+ .debug_loc     0x0000000000000ac2      0x310 hid.o
+ .debug_loc     0x0000000000000dd2       0x39 memory.o
+ .debug_loc     0x0000000000000e0b       0xe1 memcmp.o
+ .debug_loc     0x0000000000000eec      0x2e1 memset.o
+ .debug_loc     0x00000000000011cd       0xb5 strcmp.o
+ .debug_loc     0x0000000000001282       0x94 strcpy.o
+ .debug_loc     0x0000000000001316      0x382 strnlen.o
+ .debug_loc     0x0000000000001698      0xc6a wordcopy.o
+ .debug_loc     0x0000000000002302      0x2ee elf.o
+ .debug_loc     0x00000000000025f0     0x61f5 ff.o
+ .debug_loc     0x00000000000087e5     0x3e70 minion_helper.o
+ .debug_loc     0x000000000000c655      0xacf sdhci-minion-hash-md5.o
+ .debug_loc     0x000000000000d124      0xc16 mini-printf.o
+ .debug_loc     0x000000000000dd3a       0xb0 random.o
+ .debug_loc     0x000000000000ddea     0x1646 dhcp-client.o
+ .debug_loc     0x000000000000f430      0x35a stublib.o
+ .debug_loc     0x000000000000f78a      0x9e6 diskio.o
+
+.debug_aranges  0x0000000000000000      0x3d0
+ .debug_aranges
+                0x0000000000000000       0x40 /tmp/ccpw0cow.o
+ .debug_aranges
+                0x0000000000000040       0x30 syscalls.o
+ .debug_aranges
+                0x0000000000000070       0x30 hid.o
+ .debug_aranges
+                0x00000000000000a0       0x30 memory.o
+ .debug_aranges
+                0x00000000000000d0       0x30 memcmp.o
+ .debug_aranges
+                0x0000000000000100       0x30 memset.o
+ .debug_aranges
+                0x0000000000000130       0x30 strcmp.o
+ .debug_aranges
+                0x0000000000000160       0x30 strcpy.o
+ .debug_aranges
+                0x0000000000000190       0x30 strnlen.o
+ .debug_aranges
+                0x00000000000001c0       0x30 wordcopy.o
+ .debug_aranges
+                0x00000000000001f0       0x30 elf.o
+ .debug_aranges
+                0x0000000000000220       0x30 ff.o
+ .debug_aranges
+                0x0000000000000250       0x30 minion_helper.o
+ .debug_aranges
+                0x0000000000000280       0x30 sdhci-minion-hash-md5.o
+ .debug_aranges
+                0x00000000000002b0       0x30 mini-printf.o
+ .debug_aranges
+                0x00000000000002e0       0x30 random.o
+ .debug_aranges
+                0x0000000000000310       0x30 dhcp-client.o
+ .debug_aranges
+                0x0000000000000340       0x30 stublib.o
+ .debug_aranges
+                0x0000000000000370       0x30 diskio.o
+ .debug_aranges
+                0x00000000000003a0       0x30 crt.o
+
+.debug_ranges   0x0000000000000000     0x1300
+ .debug_ranges  0x0000000000000000       0x30 /tmp/ccpw0cow.o
+ .debug_ranges  0x0000000000000030       0x70 syscalls.o
+ .debug_ranges  0x00000000000000a0       0x30 memset.o
+ .debug_ranges  0x00000000000000d0       0x30 strnlen.o
+ .debug_ranges  0x0000000000000100       0x70 elf.o
+ .debug_ranges  0x0000000000000170      0x780 ff.o
+ .debug_ranges  0x00000000000008f0      0x710 minion_helper.o
+ .debug_ranges  0x0000000000001000       0x90 sdhci-minion-hash-md5.o
+ .debug_ranges  0x0000000000001090      0x110 mini-printf.o
+ .debug_ranges  0x00000000000011a0      0x160 dhcp-client.o
+
+.debug_line     0x0000000000000000     0x8532
+ .debug_line    0x0000000000000000      0x59c /tmp/ccpw0cow.o
+ .debug_line    0x000000000000059c      0x571 syscalls.o
+ .debug_line    0x0000000000000b0d      0x40b hid.o
+ .debug_line    0x0000000000000f18      0x2ef memory.o
+ .debug_line    0x0000000000001207       0xc0 memcmp.o
+ .debug_line    0x00000000000012c7      0x2b2 memset.o
+ .debug_line    0x0000000000001579      0x21b strcmp.o
+ .debug_line    0x0000000000001794      0x22d strcpy.o
+ .debug_line    0x00000000000019c1      0x2bf strnlen.o
+ .debug_line    0x0000000000001c80      0x5ca wordcopy.o
+ .debug_line    0x000000000000224a      0x367 elf.o
+ .debug_line    0x00000000000025b1     0x269e ff.o
+ .debug_line    0x0000000000004c4f     0x15b0 minion_helper.o
+ .debug_line    0x00000000000061ff      0x883 sdhci-minion-hash-md5.o
+ .debug_line    0x0000000000006a82      0x4d1 mini-printf.o
+ .debug_line    0x0000000000006f53      0x1ad random.o
+ .debug_line    0x0000000000007100      0x919 dhcp-client.o
+ .debug_line    0x0000000000007a19      0x328 stublib.o
+ .debug_line    0x0000000000007d41      0x468 diskio.o
+ .debug_line    0x00000000000081a9      0x389 crt.o
+
+.debug_str      0x0000000000000000     0x3208
+ .debug_str     0x0000000000000000      0xa26 /tmp/ccpw0cow.o
+                                        0xb78 (size before relaxing)
+ .debug_str     0x0000000000000a26      0x26f syscalls.o
+                                        0x832 (size before relaxing)
+ .debug_str     0x0000000000000c95      0x136 hid.o
+                                        0x72f (size before relaxing)
+ .debug_str     0x0000000000000dcb       0xbb memory.o
+                                        0x7cd (size before relaxing)
+ .debug_str     0x0000000000000e86       0x6b memcmp.o
+                                        0x157 (size before relaxing)
+ .debug_str     0x0000000000000ef1       0x74 memset.o
+                                        0x5c9 (size before relaxing)
+ .debug_str     0x0000000000000f65       0x6b strcmp.o
+                                        0x5a8 (size before relaxing)
+ .debug_str     0x0000000000000fd0       0x70 strcpy.o
+                                        0x5ad (size before relaxing)
+ .debug_str     0x0000000000001040       0xab strnlen.o
+                                        0x5f9 (size before relaxing)
+ .debug_str     0x00000000000010eb       0xd7 wordcopy.o
+                                        0x213 (size before relaxing)
+ .debug_str     0x00000000000011c2      0x152 elf.o
+                                        0x72a (size before relaxing)
+ .debug_str     0x0000000000001314      0x30f ff.o
+                                        0x730 (size before relaxing)
+ .debug_str     0x0000000000001623     0x125a minion_helper.o
+                                       0x1a72 (size before relaxing)
+ .debug_str     0x000000000000287d      0x16a sdhci-minion-hash-md5.o
+                                        0x733 (size before relaxing)
+ .debug_str     0x00000000000029e7       0xf5 mini-printf.o
+                                        0x673 (size before relaxing)
+ .debug_str     0x0000000000002adc       0x96 random.o
+                                        0x1f4 (size before relaxing)
+ .debug_str     0x0000000000002b72      0x548 dhcp-client.o
+                                        0xc33 (size before relaxing)
+ .debug_str     0x00000000000030ba       0x65 stublib.o
+                                        0x601 (size before relaxing)
+ .debug_str     0x000000000000311f       0x7c diskio.o
+                                        0x31f (size before relaxing)
+ .debug_str     0x000000000000319b       0x6d crt.o
+                                         0xbf (size before relaxing)
+
+.comment        0x0000000000000000       0x11
+ .comment       0x0000000000000000       0x11 /tmp/ccpw0cow.o
+                                         0x12 (size before relaxing)
+ .comment       0x0000000000000011       0x12 syscalls.o
+ .comment       0x0000000000000011       0x12 hid.o
+ .comment       0x0000000000000011       0x12 memory.o
+ .comment       0x0000000000000011       0x12 memcmp.o
+ .comment       0x0000000000000011       0x12 memset.o
+ .comment       0x0000000000000011       0x12 strcmp.o
+ .comment       0x0000000000000011       0x12 strcpy.o
+ .comment       0x0000000000000011       0x12 strnlen.o
+ .comment       0x0000000000000011       0x12 wordcopy.o
+ .comment       0x0000000000000011       0x12 elf.o
+ .comment       0x0000000000000011       0x12 ff.o
+ .comment       0x0000000000000011       0x12 minion_helper.o
+ .comment       0x0000000000000011       0x12 sdhci-minion-hash-md5.o
+ .comment       0x0000000000000011       0x12 mini-printf.o
+ .comment       0x0000000000000011       0x12 random.o
+ .comment       0x0000000000000011       0x12 dhcp-client.o
+ .comment       0x0000000000000011       0x12 stublib.o
+ .comment       0x0000000000000011       0x12 diskio.o
+
+.debug_frame    0x0000000000000000     0x1e10
+ .debug_frame   0x0000000000000000      0x2e0 /tmp/ccpw0cow.o
+ .debug_frame   0x00000000000002e0      0x130 syscalls.o
+ .debug_frame   0x0000000000000410      0x1e0 hid.o
+ .debug_frame   0x00000000000005f0       0xa0 memory.o
+ .debug_frame   0x0000000000000690       0x28 memcmp.o
+ .debug_frame   0x00000000000006b8       0x28 memset.o
+ .debug_frame   0x00000000000006e0       0x28 strcmp.o
+ .debug_frame   0x0000000000000708       0x28 strcpy.o
+ .debug_frame   0x0000000000000730       0x28 strnlen.o
+ .debug_frame   0x0000000000000758       0x70 wordcopy.o
+ .debug_frame   0x00000000000007c8       0x80 elf.o
+ .debug_frame   0x0000000000000848      0x9f8 ff.o
+ .debug_frame   0x0000000000001240      0x608 minion_helper.o
+ .debug_frame   0x0000000000001848      0x130 sdhci-minion-hash-md5.o
+ .debug_frame   0x0000000000001978      0x120 mini-printf.o
+ .debug_frame   0x0000000000001a98       0x40 random.o
+ .debug_frame   0x0000000000001ad8      0x1e0 dhcp-client.o
+ .debug_frame   0x0000000000001cb8       0x60 stublib.o
+ .debug_frame   0x0000000000001d18       0xf8 diskio.o

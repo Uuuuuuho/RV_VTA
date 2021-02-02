@@ -1,0 +1,1 @@
+/home/uho/workspace/archived_kc705_mii_mod/lowrisc-chip/fpga/bare_metal/examples/Makefile

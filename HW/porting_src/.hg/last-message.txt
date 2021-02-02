@@ -1,0 +1,4 @@
+VTA added into the block diagram design
+Rocket chip is working properly
+Yet, not verified VTA working properly.
+it should be checked soon.

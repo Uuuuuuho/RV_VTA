@@ -1,0 +1,182 @@
+#-----------------------------------------------------------
+# Vivado v2018.1 (64-bit)
+# SW Build 2188600 on Wed Apr  4 18:39:19 MDT 2018
+# IP Build 2185939 on Wed Apr  4 20:55:05 MDT 2018
+# Start of session at: Fri May 15 16:25:11 2020
+# Process ID: 4094
+# Current directory: /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv
+# Command line: vivado
+# Log file: /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/vivado.log
+# Journal file: /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/vivado.jou
+#-----------------------------------------------------------
+start_gui
+create_project KC705_vta_riscV /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/KC705_vta_riscV -part xc7k325tffg900-2
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/opt/Xilinx/Vivado/2018.1/data/ip'.
+set_property board_part xilinx.com:kc705:part0:1.5 [current_project]
+add_files -norecurse {/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/config.vh /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/framing_tb.h /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/consts.vh /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/sd_defines.h}
+add_files -norecurse {/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/fpga_srams_edited.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/fpga_srams_generate.sv /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/dualmem.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/nasti_channel.sv /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/rachelset.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/dualmem_32K_64.sv /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/sd_clock_divider.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/stubs.sv /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/ascii_code.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/dualmem_widen8.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/rx_delay.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/axis_gmii_rx.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/sd_crc_7.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/periph_soc.sv /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/generated-src/freechips.rocketchip.system.DefaultConfig.fpga_srams.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/sd_bus.sv /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/fstore2.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/generated-src/freechips.rocketchip.system.DefaultConfig.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/axis_gmii_tx.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/sd_top.sv /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/generated-src/freechips.rocketchip.system.DefaultConfig.behav_srams.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/SimJTAG_xilinx.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/ps2_keyboard.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/ps2_translation_table.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/chip_top.sv /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/framing_tb.sv /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/framing_top.sv /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/mii_to_rmii_0_open.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/eth_lfsr.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/ps2_defines.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/spi_wrapper.sv /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/sd_cmd_serial_host.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/sd_data_serial_host.sv /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/chip_top_dummy.sv /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/uart.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/lfsr.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/sd_crc_16.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/debug_system.sv /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/my_fifo.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/ps2.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/framing_top_mii.sv /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/dualmem_widen.v}
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+set_property top chip_top [current_fileset]
+update_compile_order -fileset sources_1
+create_bd_design "chip_top"
+Wrote  : </home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/KC705_vta_riscV/KC705_vta_riscV.srcs/sources_1/bd/chip_top/chip_top.bd> 
+update_compile_order -fileset sources_1
+make_wrapper -files [get_files /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/KC705_vta_riscV/KC705_vta_riscV.srcs/sources_1/bd/chip_top/chip_top.bd] -top
+Wrote  : </home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/KC705_vta_riscV/KC705_vta_riscV.srcs/sources_1/bd/chip_top/chip_top.bd> 
+Wrote  : </home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/KC705_vta_riscV/KC705_vta_riscV.srcs/sources_1/bd/chip_top/ui/bd_516a0862.ui> 
+VHDL Output written to : /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/KC705_vta_riscV/KC705_vta_riscV.srcs/sources_1/bd/chip_top/synth/chip_top.v
+VHDL Output written to : /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/KC705_vta_riscV/KC705_vta_riscV.srcs/sources_1/bd/chip_top/sim/chip_top.v
+VHDL Output written to : /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/KC705_vta_riscV/KC705_vta_riscV.srcs/sources_1/bd/chip_top/hdl/chip_top_wrapper.v
+add_files -norecurse /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/KC705_vta_riscV/KC705_vta_riscV.srcs/sources_1/bd/chip_top/hdl/chip_top_wrapper.v
+update_compile_order -fileset sources_1
+open_bd_design {/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/KC705_vta_riscV/KC705_vta_riscV.srcs/sources_1/bd/chip_top/chip_top.bd}
+export_ip_user_files -of_objects  [get_files /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/generated-src/freechips.rocketchip.system.DefaultConfig.fpga_srams.v] -no_script -reset -force -quiet
+remove_files  /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/generated-src/freechips.rocketchip.system.DefaultConfig.fpga_srams.v
+open_bd_design {/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/KC705_vta_riscV/KC705_vta_riscV.srcs/sources_1/bd/chip_top/chip_top.bd}
+create_bd_cell -type module -reference IntXbar IntXbar_0
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+delete_bd_objs [get_bd_cells IntXbar_0]
+open_bd_design {/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/KC705_vta_riscV/KC705_vta_riscV.srcs/sources_1/bd/chip_top/chip_top.bd}
+open_bd_design {/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/KC705_vta_riscV/KC705_vta_riscV.srcs/sources_1/bd/chip_top/chip_top.bd}
+open_bd_design {/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/KC705_vta_riscV/KC705_vta_riscV.srcs/sources_1/bd/chip_top/chip_top.bd}
+create_bd_design "psoc"
+Wrote  : </home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/KC705_vta_riscV/KC705_vta_riscV.srcs/sources_1/bd/psoc/psoc.bd> 
+update_compile_order -fileset sources_1
+make_wrapper -files [get_files /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/KC705_vta_riscV/KC705_vta_riscV.srcs/sources_1/bd/psoc/psoc.bd] -top
+Wrote  : </home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/KC705_vta_riscV/KC705_vta_riscV.srcs/sources_1/bd/psoc/psoc.bd> 
+Wrote  : </home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/KC705_vta_riscV/KC705_vta_riscV.srcs/sources_1/bd/psoc/ui/bd_93fcc677.ui> 
+VHDL Output written to : /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/KC705_vta_riscV/KC705_vta_riscV.srcs/sources_1/bd/psoc/synth/psoc.v
+VHDL Output written to : /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/KC705_vta_riscV/KC705_vta_riscV.srcs/sources_1/bd/psoc/sim/psoc.v
+VHDL Output written to : /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/KC705_vta_riscV/KC705_vta_riscV.srcs/sources_1/bd/psoc/hdl/psoc_wrapper.v
+add_files -norecurse /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/KC705_vta_riscV/KC705_vta_riscV.srcs/sources_1/bd/psoc/hdl/psoc_wrapper.v
+update_compile_order -fileset sources_1
+open_bd_design {/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/KC705_vta_riscV/KC705_vta_riscV.srcs/sources_1/bd/chip_top/chip_top.bd}
+open_bd_design {/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/KC705_vta_riscV/KC705_vta_riscV.srcs/sources_1/bd/chip_top/chip_top.bd}
+open_bd_design {/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/KC705_vta_riscV/KC705_vta_riscV.srcs/sources_1/bd/chip_top/chip_top.bd}
+add_files {/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/fpga_srams_edited.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/fpga_srams_generate.sv /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/dualmem.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/rachelset.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/nasti_channel.sv /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/dualmem_32K_64.sv /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/stubs.sv /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/sd_clock_divider.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/dualmem_widen8.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/ascii_code.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/config.vh /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/rx_delay.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/sd_crc_7.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/axis_gmii_rx.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/periph_soc.sv /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/generated-src/freechips.rocketchip.system.DefaultConfig.fpga_srams.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/sd_bus.sv /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/fstore2.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/generated-src/freechips.rocketchip.system.DefaultConfig.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/axis_gmii_tx.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/sd_top.sv /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/generated-src/freechips.rocketchip.system.DefaultConfig.behav_srams.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/ps2_translation_table.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/SimJTAG_xilinx.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/ps2_keyboard.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/chip_top.sv /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/framing_tb.sv /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/mii_to_rmii_0_open.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/framing_top.sv /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/eth_lfsr.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/ps2_defines.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/spi_wrapper.sv /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/sd_cmd_serial_host.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/framing_tb.h /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/sd_data_serial_host.sv /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/uart.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/chip_top_dummy.sv /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/lfsr.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/sd_crc_16.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/debug_system.sv /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/consts.vh /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/my_fifo.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/ps2.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/framing_top_mii.sv /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/sd_defines.h /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/dualmem_widen.v}
+WARNING: [filemgmt 56-12] File '/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/fpga_srams_edited.v' cannot be added to the project because it already exists in the project, skipping this file
+WARNING: [filemgmt 56-12] File '/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/fpga_srams_generate.sv' cannot be added to the project because it already exists in the project, skipping this file
+WARNING: [filemgmt 56-12] File '/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/dualmem.v' cannot be added to the project because it already exists in the project, skipping this file
+WARNING: [filemgmt 56-12] File '/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/rachelset.v' cannot be added to the project because it already exists in the project, skipping this file
+WARNING: [filemgmt 56-12] File '/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/nasti_channel.sv' cannot be added to the project because it already exists in the project, skipping this file
+WARNING: [filemgmt 56-12] File '/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/dualmem_32K_64.sv' cannot be added to the project because it already exists in the project, skipping this file
+WARNING: [filemgmt 56-12] File '/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/stubs.sv' cannot be added to the project because it already exists in the project, skipping this file
+WARNING: [filemgmt 56-12] File '/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/sd_clock_divider.v' cannot be added to the project because it already exists in the project, skipping this file
+WARNING: [filemgmt 56-12] File '/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/dualmem_widen8.v' cannot be added to the project because it already exists in the project, skipping this file
+WARNING: [filemgmt 56-12] File '/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/ascii_code.v' cannot be added to the project because it already exists in the project, skipping this file
+WARNING: [filemgmt 56-12] File '/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/config.vh' cannot be added to the project because it already exists in the project, skipping this file
+WARNING: [filemgmt 56-12] File '/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/rx_delay.v' cannot be added to the project because it already exists in the project, skipping this file
+WARNING: [filemgmt 56-12] File '/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/sd_crc_7.v' cannot be added to the project because it already exists in the project, skipping this file
+WARNING: [filemgmt 56-12] File '/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/axis_gmii_rx.v' cannot be added to the project because it already exists in the project, skipping this file
+WARNING: [filemgmt 56-12] File '/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/periph_soc.sv' cannot be added to the project because it already exists in the project, skipping this file
+WARNING: [filemgmt 56-12] File '/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/sd_bus.sv' cannot be added to the project because it already exists in the project, skipping this file
+WARNING: [filemgmt 56-12] File '/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/fstore2.v' cannot be added to the project because it already exists in the project, skipping this file
+WARNING: [filemgmt 56-12] File '/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/generated-src/freechips.rocketchip.system.DefaultConfig.v' cannot be added to the project because it already exists in the project, skipping this file
+WARNING: [filemgmt 56-12] File '/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/axis_gmii_tx.v' cannot be added to the project because it already exists in the project, skipping this file
+WARNING: [filemgmt 56-12] File '/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/sd_top.sv' cannot be added to the project because it already exists in the project, skipping this file
+WARNING: [filemgmt 56-12] File '/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/generated-src/freechips.rocketchip.system.DefaultConfig.behav_srams.v' cannot be added to the project because it already exists in the project, skipping this file
+WARNING: [filemgmt 56-12] File '/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/ps2_translation_table.v' cannot be added to the project because it already exists in the project, skipping this file
+WARNING: [filemgmt 56-12] File '/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/SimJTAG_xilinx.v' cannot be added to the project because it already exists in the project, skipping this file
+WARNING: [filemgmt 56-12] File '/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/ps2_keyboard.v' cannot be added to the project because it already exists in the project, skipping this file
+WARNING: [filemgmt 56-12] File '/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/chip_top.sv' cannot be added to the project because it already exists in the project, skipping this file
+WARNING: [filemgmt 56-12] File '/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/framing_tb.sv' cannot be added to the project because it already exists in the project, skipping this file
+WARNING: [filemgmt 56-12] File '/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/mii_to_rmii_0_open.v' cannot be added to the project because it already exists in the project, skipping this file
+WARNING: [filemgmt 56-12] File '/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/framing_top.sv' cannot be added to the project because it already exists in the project, skipping this file
+WARNING: [filemgmt 56-12] File '/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/eth_lfsr.v' cannot be added to the project because it already exists in the project, skipping this file
+WARNING: [filemgmt 56-12] File '/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/ps2_defines.v' cannot be added to the project because it already exists in the project, skipping this file
+WARNING: [filemgmt 56-12] File '/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/spi_wrapper.sv' cannot be added to the project because it already exists in the project, skipping this file
+WARNING: [filemgmt 56-12] File '/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/sd_cmd_serial_host.v' cannot be added to the project because it already exists in the project, skipping this file
+WARNING: [filemgmt 56-12] File '/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/framing_tb.h' cannot be added to the project because it already exists in the project, skipping this file
+WARNING: [filemgmt 56-12] File '/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/sd_data_serial_host.sv' cannot be added to the project because it already exists in the project, skipping this file
+WARNING: [filemgmt 56-12] File '/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/uart.v' cannot be added to the project because it already exists in the project, skipping this file
+WARNING: [filemgmt 56-12] File '/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/chip_top_dummy.sv' cannot be added to the project because it already exists in the project, skipping this file
+WARNING: [filemgmt 56-12] File '/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/lfsr.v' cannot be added to the project because it already exists in the project, skipping this file
+WARNING: [filemgmt 56-12] File '/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/sd_crc_16.v' cannot be added to the project because it already exists in the project, skipping this file
+WARNING: [filemgmt 56-12] File '/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/debug_system.sv' cannot be added to the project because it already exists in the project, skipping this file
+WARNING: [filemgmt 56-12] File '/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/consts.vh' cannot be added to the project because it already exists in the project, skipping this file
+WARNING: [filemgmt 56-12] File '/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/my_fifo.v' cannot be added to the project because it already exists in the project, skipping this file
+WARNING: [filemgmt 56-12] File '/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/ps2.v' cannot be added to the project because it already exists in the project, skipping this file
+WARNING: [filemgmt 56-12] File '/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/framing_top_mii.sv' cannot be added to the project because it already exists in the project, skipping this file
+WARNING: [filemgmt 56-12] File '/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/sd_defines.h' cannot be added to the project because it already exists in the project, skipping this file
+WARNING: [filemgmt 56-12] File '/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/dualmem_widen.v' cannot be added to the project because it already exists in the project, skipping this file
+update_compile_order -fileset sources_1
+open_bd_design {/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/KC705_vta_riscV/KC705_vta_riscV.srcs/sources_1/bd/chip_top/chip_top.bd}
+delete_fileset sim_1
+ERROR: [Common 17-53] User Exception: Sorry, cannot delete an active fileset
+export_ip_user_files -of_objects  [get_files /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/framing_tb.sv] -no_script -reset -force -quiet
+remove_files  /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/framing_tb.sv
+export_ip_user_files -of_objects  [get_files /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/sd_bus.sv] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/spi_wrapper.sv] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/stubs.sv] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/lfsr.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/ps2_translation_table.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/sd_clock_divider.v] -no_script -reset -force -quiet
+remove_files  {/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/sd_bus.sv /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/spi_wrapper.sv /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/stubs.sv /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/lfsr.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/ps2_translation_table.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/sd_clock_divider.v}
+export_ip_user_files -of_objects  [get_files /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/KC705_vta_riscV/KC705_vta_riscV.srcs/sources_1/bd/psoc/hdl/psoc_wrapper.v] -no_script -reset -force -quiet
+remove_files  /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/KC705_vta_riscV/KC705_vta_riscV.srcs/sources_1/bd/psoc/hdl/psoc_wrapper.v
+export_ip_user_files -of_objects  [get_files /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/debug_system.sv] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/framing_top_mii.sv] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/chip_top_dummy.sv] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/mii_to_rmii_0_open.v] -no_script -reset -force -quiet
+remove_files  {/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/debug_system.sv /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/framing_top_mii.sv /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/chip_top_dummy.sv /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/mii_to_rmii_0_open.v}
+export_ip_user_files -of_objects  [get_files /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/KC705_vta_riscV/KC705_vta_riscV.srcs/sources_1/bd/psoc/psoc.bd] -no_script -reset -force -quiet
+remove_files  /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/KC705_vta_riscV/KC705_vta_riscV.srcs/sources_1/bd/psoc/psoc.bd
+export_ip_user_files -of_objects  [get_files /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/generated-src/freechips.rocketchip.system.DefaultConfig.v] -no_script -reset -force -quiet
+remove_files  /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/generated-src/freechips.rocketchip.system.DefaultConfig.v
+update_compile_order -fileset sources_1
+add_files -norecurse {/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/generated-src/freechips.rocketchip.system.DefaultConfig.fpga_srams.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/generated-src/freechips.rocketchip.system.DefaultConfig.v /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/generated-src/freechips.rocketchip.system.DefaultConfig.behav_srams.v}
+WARNING: [filemgmt 56-12] File '/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/generated-src/freechips.rocketchip.system.DefaultConfig.fpga_srams.v' cannot be added to the project because it already exists in the project, skipping this file
+WARNING: [filemgmt 56-12] File '/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/generated-src/freechips.rocketchip.system.DefaultConfig.behav_srams.v' cannot be added to the project because it already exists in the project, skipping this file
+update_compile_order -fileset sources_1
+add_files -norecurse /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/vsrc/plusarg_reader.v
+update_compile_order -fileset sources_1
+open_bd_design {/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/KC705_vta_riscV/KC705_vta_riscV.srcs/sources_1/bd/chip_top/chip_top.bd}
+add_files -norecurse /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/vsrc/AsyncResetReg.v
+update_compile_order -fileset sources_1
+create_bd_cell -type module -reference ExampleRocketSystem ExampleRocketSystem_0
+INFO: [IP_Flow 19-5107] Inferred bus interface 'debug_systemjtag_reset' of definition 'xilinx.com:signal:reset:1.0' (from Xilinx Repository).
+INFO: [IP_Flow 19-5107] Inferred bus interface 'reset' of definition 'xilinx.com:signal:reset:1.0' (from Xilinx Repository).
+INFO: [IP_Flow 19-5107] Inferred bus interface 'clock' of definition 'xilinx.com:signal:clock:1.0' (from Xilinx Repository).
+INFO: [IP_Flow 19-4728] Bus Interface 'clock': Added interface parameter 'ASSOCIATED_RESET' with value 'reset'.
+WARNING: [IP_Flow 19-3153] Bus Interface 'clock': ASSOCIATED_BUSIF bus parameter is missing.
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+delete_bd_objs [get_bd_cells ExampleRocketSystem_0]
+create_bd_cell -type module -reference ExampleRocketSystem ExampleRocketSystem_0
+delete_bd_objs [get_bd_cells ExampleRocketSystem_0]
+export_ip_user_files -of_objects  [get_files /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/periph_soc.sv] -no_script -reset -force -quiet
+remove_files  /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/periph_soc.sv
+update_compile_order -fileset sources_1
+open_bd_design {/home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/KC705_vta_riscV/KC705_vta_riscV.srcs/sources_1/bd/chip_top/chip_top.bd}
+save_bd_design
+Wrote  : </home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/KC705_vta_riscV/KC705_vta_riscV.srcs/sources_1/bd/chip_top/chip_top.bd> 
+Wrote  : </home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/KC705_vta_riscV/KC705_vta_riscV.srcs/sources_1/bd/chip_top/ui/bd_516a0862.ui> 
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+add_files -norecurse /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/periph_soc.sv
+update_compile_order -fileset sources_1
+create_bd_cell -type module -reference ExampleRocketSystem ExampleRocketSystem_0
+WARNING: [IP_Flow 19-3899] Cannot get the environment domain name variable for the component vendor name. Setting the vendor name to 'user.org'.
+report_ip_status -name ip_status 
+create_bd_cell -type module -reference rx_delay rx_delay_0
+INFO: [IP_Flow 19-5107] Inferred bus interface 'clk' of definition 'xilinx.com:signal:clock:1.0' (from Xilinx Repository).
+WARNING: [IP_Flow 19-3153] Bus Interface 'clk': ASSOCIATED_BUSIF bus parameter is missing.
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+delete_bd_objs [get_bd_cells rx_delay_0]
+add_files -norecurse /home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/src_all/src/main/verilog/stubs.sv
+update_compile_order -fileset sources_1
+set_property "default_lib" "xil_defaultlib"
+ERROR: [Common 17-163] Missing value for option 'objects', please type 'set_property -help' for usage info.
+set obj [get_projects KC705_vta_riscV]
+KC705_vta_riscV
+set_property "default_lib" "xil_defaultlib" $obj
+set_property "board_part" "xilinx.com:kc705:part0:1.1" $obj
+save_bd_design
+Wrote  : </home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/KC705_vta_riscV/KC705_vta_riscV.srcs/sources_1/bd/chip_top/chip_top.bd> 
+Wrote  : </home/uho/workspace/lowriscv_chip/HW/project_vta-riscv/KC705_vta_riscV/KC705_vta_riscV.srcs/sources_1/bd/chip_top/ui/bd_516a0862.ui> 
+exit
